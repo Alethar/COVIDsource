@@ -5,9 +5,6 @@ import javax.swing.*;
 public class GUI extends JFrame
 {
 	private Searcher searcher;
-	public GUI(Searcher searcher){
-		this.searcher = searcher;
-	}
 	private JPanel searchArea;
 	private JPanel taskArea;
 	private JPanel mainArea;
@@ -19,8 +16,9 @@ public class GUI extends JFrame
     private JPanel searchtags;
     private JPanel searchpanels;
     
-    public GUI() {
+    public GUI(Searcher searcher) {
     	super("Researcher");
+	this.searcher = searcher;
     	setVisible(true);
     	setSize(1600, 900);
     	
