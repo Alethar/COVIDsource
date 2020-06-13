@@ -4,6 +4,10 @@ import javax.swing.*;
 
 public class GUI extends JFrame
 {
+	private Searcher searcher;
+	public GUI(Searcher searcher){
+		this.searcher = searcher;
+	}
 	private JPanel searchArea;
 	private JPanel taskArea;
 	private JPanel mainArea;
