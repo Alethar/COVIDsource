@@ -15,7 +15,7 @@ public class GUI extends JFrame
     private JPanel searchtags;
     private JPanel searchpanels;
     
-    public GUI() {
+    public GUI(Main main) {
     	super("Researcher");
     	setVisible(true);
     	setSize(1600, 900);
@@ -42,6 +42,13 @@ public class GUI extends JFrame
     	
     	//Sidebar
     	taskArea.setLayout(new BoxLayout(taskArea, BoxLayout.Y_AXIS));
+    	dailyTasks = new JPanel();
+    	articleDropoff = new JPanel();
     	
+    	dailyTasks.setBackground(Color.red);
+    	articleDropoff.setBackground(Color.green);
+    	
+    	taskArea.add(dailyTasks);
+    	taskArea.add(articleDropoff);
     }
 }
