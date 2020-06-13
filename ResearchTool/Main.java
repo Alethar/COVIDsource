@@ -2,17 +2,11 @@
 public class Main
 {
     public static void main(String[] args) {
-        //Test test = new Test();
-    	GUI gui = new GUI();
-    }
-    public void controller() throws InterruptedException {
-        GUI g = new GUI(this);
+        Searcher s = new Searcher();
+        GUI g = new GUI(s);
+        s.setGUI( g );
         while(true) {
-            Thread.sleep(100);
+            Thread.sleep( 1000000 );
         }
-        
-    }
-    public void checkAction() {
-        
     }
 }

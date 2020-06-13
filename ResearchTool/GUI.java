@@ -4,6 +4,7 @@ import javax.swing.*;
 
 public class GUI extends JFrame
 {
+	private Searcher searcher;
 	private JPanel searchArea;
 	private JPanel taskArea;
 	private JPanel mainArea;
@@ -15,8 +16,9 @@ public class GUI extends JFrame
     private JPanel searchtags;
     private JPanel searchpanels;
     
-    public GUI(Main main) {
+    public GUI(Searcher searcher) {
     	super("Researcher");
+	this.searcher = searcher;
     	setVisible(true);
     	setSize(1600, 900);
     	
@@ -42,13 +44,6 @@ public class GUI extends JFrame
     	
     	//Sidebar
     	taskArea.setLayout(new BoxLayout(taskArea, BoxLayout.Y_AXIS));
-    	dailyTasks = new JPanel();
-    	articleDropoff = new JPanel();
     	
-    	dailyTasks.setBackground(Color.red);
-    	articleDropoff.setBackground(Color.green);
-    	
-    	taskArea.add(dailyTasks);
-    	taskArea.add(articleDropoff);
     }
 }
