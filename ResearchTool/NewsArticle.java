@@ -26,8 +26,8 @@ public class NewsArticle extends Article
         String name,
         String sampleText,
         String url,
-        int cred,
-        int bias,
+        double cred,
+        double bias,
         String info )
     {
         super( name, sampleText, url );
@@ -68,7 +68,7 @@ public class NewsArticle extends Article
      * 
      * @return
      */
-    public double getInfo()
+    public String getInfo()
     {
         return info;
     }
