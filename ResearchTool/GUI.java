@@ -166,6 +166,12 @@ public class GUI extends JFrame {
 	}
 	
 	public void loadSearchResults() {
+		for (int i=0; i<searcher.getArticleNum(); i++) {
+			Article art = searcher.getArticle(i);
+			System.out.println(art.getName());
+			
+			//addSearchResult
+		}
 	}
 
 	public void addSearchResult(Article article, JPanel container) {
