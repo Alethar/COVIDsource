@@ -75,6 +75,11 @@ public class Searcher
                 String author;
                 String linkHref;
                 String title;
+                /**
+                 * if link does not meet standard format, we assume it is not a
+                 * normal link (like a twitter link or suggestion/advertisement
+                 * from google) and skip it
+                 */
                 try
                 {
                     linkHref = result.attr( "href" );
