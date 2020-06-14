@@ -20,10 +20,14 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 public class GUI extends JFrame {
+	static GUI main;
+	
 	private Searcher searcher;
 	private JPanel searchArea;
 	private JPanel taskArea;
 	private JPanel mainArea;
+	
+	private JTextField searchBar;
 	
 	/**
 	 * Initialize GUI Elements. This block handles the frame and the overall layout.
@@ -34,6 +38,11 @@ public class GUI extends JFrame {
 		this.searcher = searcher;
 		setVisible(true);
 		setSize(1600, 900);
+		
+		if (main == null) main=this;
+		else {
+			System.out.println("ERROR: GUI SINGLETON BREACHED");
+		}
 
 		mainArea = new JPanel();
 		mainArea.setLayout(new BorderLayout());
@@ -77,11 +86,17 @@ public class GUI extends JFrame {
 		topBar.setLayout(new BoxLayout(topBar, BoxLayout.Y_AXIS));
 		topBar.setBorder(new EmptyBorder(0, 30, 0, 0));
 		topBar.add(Box.createRigidArea(new Dimension(0, 15)));
+		
 
 		// Adding items to top
-		JTextField searchBar = new JTextField(20);
+		SearchAction searchAction = new SearchAction();
+		
+		searchBar = new JTextField(20);
+		searchBar.addActionListener(searchAction);
 		topBar.add(searchBar);
+		
 		JButton searchButton = new JButton("Search");
+		searchButton.addActionListener(searchAction);
 		topBar.add(searchButton);
 
 		// Assigning top bar to whole area container
@@ -157,5 +172,9 @@ public class GUI extends JFrame {
 
 	public void addSearchResult(JPanel container) {
 		System.out.println("TODO: insert search result.");
+	}
+	
+	public String getSearchBarContent() {
+		return searchBar.getText();
 	}
 }
