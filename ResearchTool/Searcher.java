@@ -290,8 +290,6 @@ public class Searcher
         String os = System.getProperty( "os.name" ).toLowerCase();
         Runtime rt = Runtime.getRuntime();
 
-        String urlTrimmed = url.substring( 1 );
-
         try
         {
             if ( os.indexOf( "win" ) >= 0 )
