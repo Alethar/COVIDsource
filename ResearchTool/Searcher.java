@@ -10,8 +10,6 @@ import org.jsoup.select.Elements;
 
 public class Searcher
 {
-	static Searcher main;
-	
     private static final String GOOGLE_SEARCH_URL = "https://www.google.com/search?q=";
 
     // http://www.google.com/search?q=abc+def searches for "abc def"
@@ -23,15 +21,9 @@ public class Searcher
 
     private double[] newsCred = { 4.5, 5, 4 };
 
-
     public Searcher()
     {
-        //does absolutely fin nothing
-    	//Not anymore
-    	if (main == null) main=this;
-		else {
-			System.out.println("ERROR: SEARCHER SINGLETON BREACHED");
-		}
+        // does absolutely fin nothing
     }
 
 
@@ -47,24 +39,46 @@ public class Searcher
      * 
      * @param amount
      *            of sources you want
+     * @return null if no error, IOException if error (likely internet
+     *         connection)
      */
-    public void getSources( String searchterm, int amount )
+    public Object getSources( String searchterm, int amount )
     {
         String[] searchTerms = searchterm.split( " " );
         String searchURL = GOOGLE_SEARCH_URL;
-        for(int i = 0; i < searchTerms.length; i++) {
+        for ( int i = 0; i < searchTerms.length; i++ )
+        {
             searchURL += searchTerms[i];
-            if(i != searchTerms.length) {
-                searchURL+= "+";
+            if ( i != searchTerms.length )
+            {
+                searchURL += "+";
             }
         }
         searchURL += "&nums=";
-        searchURL += ("" + amount);
-        
-        
-        //String searchURL = GOOGLE_SEARCH_URL + "?q="+searchTerm+"&num="+num;
-        //without proper User-Agent, we will get 403 error
-        //Document doc = Jsoup.connect(searchURL).userAgent("Mozilla/5.0").get();
+        searchURL += ( "" + amount );
+        try
+        {
+            Document webpage = Jsoup.connect( searchURL ).userAgent( "Mozilla/5.0" ).get();
+            Elements results = webpage.select( "h3.r > a" );
+            for ( Element result : results )
+            {
+                String linkHref = result.attr( "href" );
+                String linkText = result.text();
+                System.out.println( "Text::" + linkText + ", URL::"
+                    + linkHref.substring( 6, linkHref.indexOf( "&" ) ) );
+            }
+        }
+        catch ( IOException e )
+        {
+            System.out.println( e );
+            return e;
+        }
+
+        return null;
+        // String searchURL = GOOGLE_SEARCH_URL + "?q="+searchTerm+"&num="+num;
+        // without proper User-Agent, we will get 403 error
+        // Document doc =
+        // Jsoup.connect(searchURL).userAgent("Mozilla/5.0").get();
     }
 
 
