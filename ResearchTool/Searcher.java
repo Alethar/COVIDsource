@@ -1,3 +1,4 @@
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -23,7 +24,7 @@ public class Searcher
 
     public Searcher()
     {
-
+        //does absolutely fin nothing
     }
 
 
@@ -42,7 +43,21 @@ public class Searcher
      */
     public void getSources( String searchterm, int amount )
     {
-
+        String[] searchTerms = searchterm.split( " " );
+        String searchURL = GOOGLE_SEARCH_URL;
+        for(int i = 0; i < searchTerms.length; i++) {
+            searchURL += searchTerms[i];
+            if(i != searchTerms.length) {
+                searchURL+= "+";
+            }
+        }
+        searchURL += "&nums=";
+        searchURL += ("" + amount);
+        
+        
+        //String searchURL = GOOGLE_SEARCH_URL + "?q="+searchTerm+"&num="+num;
+        //without proper User-Agent, we will get 403 error
+        //Document doc = Jsoup.connect(searchURL).userAgent("Mozilla/5.0").get();
     }
 
 
