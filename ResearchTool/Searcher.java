@@ -8,4 +8,8 @@ public class Searcher
     public void setGUI(GUI gui) {
         this.gui = gui;
     }
+    
+    public void searchQuery(String query) {
+    	
+    }
 }
