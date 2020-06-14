@@ -84,7 +84,7 @@ public class GUI extends JFrame {
 		
 
 		// Adding items to top
-		SearchAction searchAction = new SearchAction(this, searcher);
+		SearchListener searchAction = new SearchListener(this, searcher);
 		
 		searchBar = new JTextField(20);
 		searchBar.addActionListener(searchAction);
@@ -127,7 +127,10 @@ public class GUI extends JFrame {
 		logoText.setFont(new Font(logoText.getFont().getName(), Font.BOLD, 25));
 		logo.add(logoText);
 		taskAreaContent.add(logoText);
-
+		
+		//Spacing
+		taskAreaContent.add(Box.createRigidArea(new Dimension(0, 50)));
+		
 		// Daily Tasks
 		JPanel dailyTasks = new JPanel(new GridBagLayout());
 		// dailyTasks.setBackground(Color.red);
@@ -138,10 +141,17 @@ public class GUI extends JFrame {
 		addTask("taskE", dailyTasks);
 
 		taskAreaContent.add(dailyTasks);
-
+		
+		//Spacing
+		taskAreaContent.add(Box.createRigidArea(new Dimension(0, 50)));
+		
 		// Article Dropoff
 		JPanel articleDropoff = new JPanel();
+		JLabel dropoffLabel = new JLabel("OMNOMNOMNOMNOM");
+		dropoffLabel.setFont(new Font(logoText.getFont().getName(), Font.BOLD, 25));
 		articleDropoff.setBackground(Color.green);
+		
+		articleDropoff.add(dropoffLabel);
 		taskAreaContent.add(articleDropoff);
 	}
 	
@@ -183,6 +193,7 @@ public class GUI extends JFrame {
 		
 		JPanel parent = new JPanel();
 		parent.setLayout(new BoxLayout(parent, BoxLayout.Y_AXIS));
+		parent.addMouseListener(new ArticleSelectListener(this, searcher));
 		
 		JLabel name = new JLabel(article.getName());
 		JLabel sampleText = new JLabel(article.getSampleText());
