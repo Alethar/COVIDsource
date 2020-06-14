@@ -68,7 +68,7 @@ public class NewsArticle extends Article
      * 
      * @return
      */
-    public int getInfo()
+    public double getInfo()
     {
         return info;
     }
