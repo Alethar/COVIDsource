@@ -20,13 +20,13 @@ public class Searcher
 
     private ArrayList<Article> articles;
 
-    private String[] newsNames = { "a", "b", "c" };
+    //private String[] newsNames = { "a", "b", "c" };
 
-    private String[] newsURLs = { "www.google.com", "www.reddit.com", "www.bing.com" };
+    private String[] newsURLs = { "www.achnews.org", "www.reddit.com", "www.bing.com" };
 
-    private double[] newsCred = { 4.5, 5, 4 };
+    private int[] newsCred = { 4, 5, 4 }; //0 to 5, 0 is not credible and 5 is credible
 
-    private double[] newsBias = { 4.5, 5, 4 };
+    private int[] newsBias = { 4, 5, 4 }; //0 to 6, 0 is left and 6 is right
 
 
     public Searcher()
