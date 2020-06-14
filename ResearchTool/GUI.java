@@ -27,6 +27,7 @@ public class GUI extends JFrame {
 	private JPanel mainArea;
 	
 	private JTextField searchBar;
+	private JPanel searchResults;
 	
 	/**
 	 * Initialize GUI Elements. This block handles the frame and the overall layout.
@@ -99,11 +100,13 @@ public class GUI extends JFrame {
 		searchArea.add(topBar, BorderLayout.NORTH);
 
 		// Search results
-		JPanel searchResults = new JPanel();
-		searchResults.setLayout(new GridBagLayout());
+		searchResults = new JPanel();
+		searchResults.setLayout(new BoxLayout(searchResults, BoxLayout.Y_AXIS));
 		searchResults.setBackground(Color.white);
+		searchResults.setBorder(new EmptyBorder(20, 50, 0, 0));
 		
-		//addSearchResult(searchResults);
+		addSearchResult(new Article("Name", "SAAAAAMMMMPPPPLLEEE TEEXXXTTTTT", "url.com"), searchResults);
+		addSearchResult(new Article("Naem", "SAAAAAMMMMPPPPLLEEE TEEXXXTTTTT", "url.com"), searchResults);
 
 		searchArea.add(searchResults, BorderLayout.CENTER);
 	}
@@ -165,19 +168,34 @@ public class GUI extends JFrame {
 		container.add(checkBox, checkBoxGBC);
 	}
 	
+	//Loads all search results
 	public void loadSearchResults() {
 		for (int i=0; i<searcher.getArticleNum(); i++) {
 			Article art = searcher.getArticle(i);
 			System.out.println(art.getName());
 			
-			//addSearchResult
+			addSearchResult(art, searchResults);
 		}
 	}
 
 	public void addSearchResult(Article article, JPanel container) {
 		System.out.println("TODO: insert search result.");
 		
+		JPanel parent = new JPanel();
+		parent.setLayout(new BoxLayout(parent, BoxLayout.Y_AXIS));
 		
+		JLabel name = new JLabel(article.getName());
+		JLabel sampleText = new JLabel(article.getSampleText());
+		JLabel url = new JLabel(article.getURL());
+		
+		parent.add(name);
+		parent.add(sampleText);
+		parent.add(url);
+		
+		container.add(parent);
+		
+		//Spacing
+		container.add(Box.createRigidArea(new Dimension(0, 20)));
 	}
 	
 	public String getSearchBarContent() {
