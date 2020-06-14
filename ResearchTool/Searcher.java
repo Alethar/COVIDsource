@@ -1,5 +1,6 @@
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.jsoup.Jsoup;
@@ -15,11 +16,14 @@ public class Searcher
     // http://www.google.com/search?q=abc+def searches for "abc def"
     private GUI gui;
 
-    private Article[] articles;
+    private ArrayList<Article> articles;
 
     private String[] newsNames = { "a", "b", "c" };
 
     private double[] newsCred = { 4.5, 5, 4 };
+
+    private double[] newsBias = { 4.5, 5, 4 };
+
 
     public Searcher()
     {
@@ -41,6 +45,7 @@ public class Searcher
      *            of sources you want
      * @return null if no error, IOException if error (likely internet
      *         connection)
+     * @TODO change the subtext input for the articles.add
      */
     public Object getSources( String searchterm, int amount )
     {
@@ -64,8 +69,22 @@ public class Searcher
             {
                 String linkHref = result.attr( "href" );
                 String linkText = result.text();
-                System.out.println( "Text::" + linkText + ", URL::"
-                    + linkHref.substring( 6, linkHref.indexOf( "&" ) ) );
+                String link = linkHref.substring( 6, linkHref.indexOf( "&" ) );
+                int newsID = isNews( link );
+                if ( newsID != -1 )
+                { // news article
+                    articles.add( new NewsArticle( newsNames[newsID],
+                        ""/* @TODO */,
+                        link,
+                        newsCred[newsID],
+                        newsBias[newsID] ) );
+                }
+                else
+                { // general article
+                    articles
+                        .add( new Article( link.split( "/" )[2], ""/* @TODO */, link ) );
+                }
+                // System.out.println( "Text::" + linkText + ", URL::" + link);
             }
         }
         catch ( IOException e )
@@ -92,10 +111,24 @@ public class Searcher
      */
     public Article getArticle( int articleNum )
     {
-        if ( articleNum >= articles.length )
+        if ( articleNum >= articles.size() )
         {
             return null;
         }
-        return articles[articleNum];
+        return articles.get( articleNum );
+    }
+
+
+    /**
+     * 
+     * checks the article link to see if the news name is included
+     * @param url
+     * @return
+     */
+    private int isNews(String url) {
+        url = url.split( "." )[1];
+        for()
+        
+        return -1;
     }
 }
