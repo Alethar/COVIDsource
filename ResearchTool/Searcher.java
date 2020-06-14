@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -21,6 +20,7 @@ public class Searcher
     private String[] newsNames = { "a", "b", "c" };
     
     private String[] newsURLs = { "www.google.com", "www.reddit.com", "www.bing.com"};
+    
     private double[] newsCred = { 4.5, 5, 4 };
 
     private double[] newsBias = { 4.5, 5, 4 };
@@ -70,7 +70,7 @@ public class Searcher
                 String linkHref = result.attr( "href" );
                 String linkText = result.text();
                 String link = linkHref.substring( 6, linkHref.indexOf( "&" ) );
-                int newsID = isNews( link );
+                int newsID = isNews( link.split( "/" )[2]  );
                 if ( newsID != -1 )
                 { // news article
                     articles.add( new NewsArticle( newsNames[newsID],
