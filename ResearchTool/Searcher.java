@@ -86,11 +86,11 @@ public class Searcher
                     String linkText = result.text();
                     author = result.select( "div.BNeawe.tAd8D.AP7Wnd" ).first().text();
 
-                    PrintWriter out = new PrintWriter(
-                        new BufferedWriter( new FileWriter( "test.out" ) ) );
-                    out.print( result.toString() );
-                    out.println();
-                    out.close();
+                    //PrintWriter out = new PrintWriter(
+                    //    new BufferedWriter( new FileWriter( "test.out" ) ) );
+                    //out.print( result.toString() );
+                    //out.println();
+                    //out.close();
                     title = result.select( "span" ).first().text();
 
                 }
