@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -20,11 +19,6 @@ public class Searcher
     public void setGUI(GUI gui) {
         this.gui = gui;
     }
-<<<<<<< HEAD
-    
-    public void searchQuery(String query) {
-    	
-=======
     /**
      * 
      * Gets the required amount of sources and loads info into class variable
@@ -32,6 +26,5 @@ public class Searcher
      */
     public void getSources(String searchterm, int amount) {
         
->>>>>>> a9cc725dca5c4051369bf6dab94a340fd9a95f12
     }
 }
