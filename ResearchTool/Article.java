@@ -1,36 +1,54 @@
 
 public class Article
 {
-    private String name;
+    private String title;
 
     private String sampleText;
 
-    private String url;
+    private String url; // https://something/www.google.com/search/deunijf238udnblehhhhhhh+alltherestfthestuff
+
+    /**
+     * 
+     */
+    private String smallurl; // just www.google.com
+
+    private String author;
 
 
     /**
      * Contructor initiaizes variables
      * 
-     * @param name
+     * @param title
+     *            the title of the article
      * @param sampleText
+     *            the sample text of the article
+     * @param url
+     *            the complete link to the article
+     *            (https://something/www.google.com/search/deunijf238udnblehhhhhhh+alltherestfthestuff)
+     * @param smallurl
+     *            the link to the article's host (just www.google.com)
+     * @param author
+     *            the author/organization that wrote/hosted the article
      */
-    public Article( String name, String sampleText, String url )
+    public Article( String title, String sampleText, String url, String smallurl, String author )
     {
-        this.name = name;
+        this.title = title;
         this.sampleText = sampleText;
         this.url = url;
+        this.smallurl = smallurl;
+        this.author = author;
     }
 
 
     /**
      * 
-     * Accessor method for article name
+     * Accessor method for article title
      * 
      * @return
      */
     public String getName()
     {
-        return name;
+        return title;
     }
 
 
@@ -55,5 +73,27 @@ public class Article
     public String getURL()
     {
         return url;
+    }
+
+    /**
+     * 
+     * Accessor method for article smallurl
+     * 
+     * @return
+     */
+    public String getSmallURL()
+    {
+        return smallurl;
+    }
+
+    /**
+     * 
+     * Accessor method for article author
+     * 
+     * @return
+     */
+    public String getAuthor()
+    {
+        return author;
     }
 }
