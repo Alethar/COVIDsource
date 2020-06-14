@@ -19,7 +19,8 @@ public class Searcher
     private ArrayList<Article> articles;
 
     private String[] newsNames = { "a", "b", "c" };
-
+    
+    private String[] newsURLs = { "www.google.com", "www.reddit.com", "www.bing.com"};
     private double[] newsCred = { 4.5, 5, 4 };
 
     private double[] newsBias = { 4.5, 5, 4 };
@@ -137,8 +138,12 @@ public class Searcher
      * @return
      */
     private int isNews(String url) {
-        url = url.split( "." )[1];
-        for()
+//        url = url.split( "." )[1];
+        for(int i = 0; i< newsURLs.length; i++) {
+            if(url.contains(newsURLs[i])) {
+                return i;
+            }
+        }
         
         return -1;
     }
