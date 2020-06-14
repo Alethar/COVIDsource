@@ -20,7 +20,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 public class GUI extends JFrame {
-	static GUI main;
 	
 	private Searcher searcher;
 	private JPanel searchArea;
@@ -38,11 +37,6 @@ public class GUI extends JFrame {
 		this.searcher = searcher;
 		setVisible(true);
 		setSize(1600, 900);
-		
-		if (main == null) main=this;
-		else {
-			System.out.println("ERROR: GUI SINGLETON BREACHED");
-		}
 
 		mainArea = new JPanel();
 		mainArea.setLayout(new BorderLayout());
@@ -89,7 +83,7 @@ public class GUI extends JFrame {
 		
 
 		// Adding items to top
-		SearchAction searchAction = new SearchAction();
+		SearchAction searchAction = new SearchAction(this, searcher);
 		
 		searchBar = new JTextField(20);
 		searchBar.addActionListener(searchAction);
@@ -109,7 +103,7 @@ public class GUI extends JFrame {
 		searchResults.setLayout(new GridBagLayout());
 		searchResults.setBackground(Color.white);
 		
-		addSearchResult(searchResults);
+		//addSearchResult(searchResults);
 
 		searchArea.add(searchResults, BorderLayout.CENTER);
 	}
