@@ -114,11 +114,23 @@ public class Searcher
                 }
                 // if(result.select("span") == null ||
                 // result.select("span").first() == null ){
-                Elements my_r = result.select( "span" );
+                
                 // title = result.select( "span" ).first().text();
+                /*Elements my_r = result.select( "span" );
                 if ( my_r.size() == 0 )
                 {
                     my_r = result.select( "div.BNeawe.vvjwJb.AP7Wnd" );
+                    if ( my_r.size() == 0 )
+                    {
+                        // System.out.println("Allequal0");
+                        // System.out.println(result.toString());
+                        continue;
+                    }
+                }*/
+                Elements my_r = result.select( "div.BNeawe.vvjwJb.AP7Wnd" );
+                if ( my_r.size() == 0 )
+                {
+                    my_r = result.select( "span" );
                     if ( my_r.size() == 0 )
                     {
                         // System.out.println("Allequal0");
@@ -166,7 +178,7 @@ public class Searcher
                 { // news article
                     articles.add( new NewsArticle( title,
                         ""/* @TODO subtext */,
-                        link,
+                        link.substring( 1 ),
                         smalllink,
                         author,
                         newsCred[newsID],
@@ -181,7 +193,7 @@ public class Searcher
 
                     Article newArticle = new Article( title,
                         ""/* @TODO subtext */,
-                        link,
+                        link.substring( 1 ),
                         smalllink,
                         author );
                     articles.add( newArticle );
