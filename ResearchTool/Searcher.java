@@ -29,6 +29,8 @@ public class Searcher
     public Searcher()
     {
         // does absolutely fin nothing
+    	//Not anymore
+    	articles = new ArrayList<>();
     }
 
 
@@ -86,7 +88,13 @@ public class Searcher
                 }
                 else
                 { // general article
-                    articles.add( new Article( title, ""/* @TODO subtext */, link, smalllink, author ) );
+                	System.out.println("Title: " + title);
+                	System.out.println("link: " + link);
+                	System.out.println("smalllink: " + smalllink);
+                	System.out.println("author: " + author);
+                	
+                	Article newArticle = new Article( title, ""/* @TODO subtext */, link, smalllink, author );
+                	articles.add( newArticle );
                 }
                 // System.out.println( "Text::" + linkText + ", URL::" + link);
             }
