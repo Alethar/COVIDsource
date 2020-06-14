@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -21,7 +22,8 @@ public class ArticleSelectListener implements MouseListener {
 		Mouse.hasURL = true;
 		
 		JPanel panel = (JPanel) e.getSource();
-		JLabel urlLabel = (JLabel) panel.getComponent(2);
+		JPanel childPanel = (JPanel) ((BorderLayout) panel.getLayout()).getLayoutComponent(BorderLayout.CENTER);
+		JLabel urlLabel = (JLabel) childPanel.getComponent(2);
 		Mouse.url = urlLabel.getText();
 		
 		System.out.println(Mouse.url + " picked up");

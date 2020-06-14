@@ -109,6 +109,8 @@ public class GUI extends JFrame {
 		searchResults.setBackground(Color.white);
 		searchResults.setBorder(new EmptyBorder(20, 50, 0, 0));
 		
+		addSearchResult(new NewsArticle("title", "sampleText", "url", "smallurl", "author", 5, 5), searchResults);
+		
 		JScrollPane searchResultsScroll = new JScrollPane(searchResults);
 		searchArea.add(searchResultsScroll, BorderLayout.CENTER);
 	}
