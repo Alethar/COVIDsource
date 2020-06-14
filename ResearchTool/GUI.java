@@ -205,21 +205,12 @@ public class GUI extends JFrame {
 	}
 
 	public void addSearchResult(Article article, JPanel container) {
-		JPanel parent = new JPanel();
-		parent.setLayout(new BoxLayout(parent, BoxLayout.Y_AXIS));
-		parent.addMouseListener(new ArticleSelectListener(this, searcher));
 		
-		JLabel name = new JLabel(article.getName());
-		JLabel sampleText = new JLabel(article.getSampleText());
-		JLabel url = new JLabel(article.getURL());
-		JLabel smallURL = new JLabel(article.getSmallURL());
-		JLabel author = new JLabel(article.getAuthor());
+		//TODO: Create class for parent and attach article to it.
+		//This is so the credibility score can be layed out next to it.
+		//All of this can then go into the constructor for the new class.
 		
-		parent.add(name);
-		parent.add(sampleText);
-		parent.add(url);
-		parent.add(smallURL);
-		parent.add(author);
+		JArticlePanel parent = new JArticlePanel(article, searcher, this);
 		
 		container.add(parent);
 		
