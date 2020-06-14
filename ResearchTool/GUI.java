@@ -105,8 +105,8 @@ public class GUI extends JFrame {
 		searchResults.setBackground(Color.white);
 		searchResults.setBorder(new EmptyBorder(20, 50, 0, 0));
 		
-		addSearchResult(new Article("Name", "SAAAAAMMMMPPPPLLEEE TEEXXXTTTTT", "url.com"), searchResults);
-		addSearchResult(new Article("Naem", "SAAAAAMMMMPPPPLLEEE TEEXXXTTTTT", "url.com"), searchResults);
+		addSearchResult(new Article("Name", "SAAAAAMMMMPPPPLLEEE TEEXXXTTTTT", "url.com", "url", "bob"), searchResults);
+		addSearchResult(new Article("Naem", "SAAAAAMMMMPPPPLLEEE TEEXXXTTTTT", "url.com", "url", "tim"), searchResults);
 
 		searchArea.add(searchResults, BorderLayout.CENTER);
 	}
@@ -200,10 +200,14 @@ public class GUI extends JFrame {
 		JLabel name = new JLabel(article.getName());
 		JLabel sampleText = new JLabel(article.getSampleText());
 		JLabel url = new JLabel(article.getURL());
+		JLabel smallURL = new JLabel(article.getSmallURL());
+		JLabel author = new JLabel(article.getAuthor());
 		
 		parent.add(name);
 		parent.add(sampleText);
 		parent.add(url);
+		parent.add(smallURL);
+		parent.add(author);
 		
 		container.add(parent);
 		

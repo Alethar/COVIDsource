@@ -1,5 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class SearchListener implements ActionListener {
 	
@@ -14,7 +15,13 @@ public class SearchListener implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		String searchTerm = gui.getSearchBarContent();
 		System.out.println("Searched for: "+searchTerm);
-		searcher.getSources(searchTerm.split(" "), 10);
+		
+		//Convert to ArrayList
+		String[] termsArr = searchTerm.split(" ");
+		ArrayList<String> terms = new ArrayList<>();
+		for (String str: termsArr) terms.add(str);
+		
+		searcher.getSources(terms, 10);
 		//TODO: Throw error if getSources returns something other than Null
 		
 		//Now tell GUI to load some stuff
