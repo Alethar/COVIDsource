@@ -1,39 +1,23 @@
 
 public class NewsArticle extends Article
 {
-    private String name;
-
-    private String sampleText;
-
-    private String url;
-
-    private String info;
-
     private double cred;
 
     private double bias;
 
 
-    public NewsArticle( String name, String sampleText, String url, double newsCred, double newsBias )
-    {
-        super( name, sampleText, url );
-        this.cred = newsCred;
-        this.bias = newsBias;
-    }
-
-
     public NewsArticle(
-        String name,
+        String title,
         String sampleText,
         String url,
-        double cred,
-        double bias,
-        String info )
+        String smallurl,
+        String author,
+        double newsCred,
+        double newsBias )
     {
-        super( name, sampleText, url );
-        this.cred = cred;
-        this.bias = bias;
-        this.info = info;
+        super( title, sampleText, url, smallurl, author );
+        this.cred = newsCred;
+        this.bias = newsBias;
     }
 
 
@@ -61,15 +45,4 @@ public class NewsArticle extends Article
         return bias;
     }
 
-
-    /**
-     * 
-     * Accessor method for news info
-     * 
-     * @return
-     */
-    public String getInfo()
-    {
-        return info;
-    }
 }
