@@ -297,11 +297,11 @@ public class Searcher
 
                 // Doesn't support urls like page.html#nameLink, maybe just
                 // delete those?
-                rt.exec( "rundll32 url.dll,FileProtocolHandler " + urlTrimmed );
+                rt.exec( "rundll32 url.dll,FileProtocolHandler " + url );
             }
             else if ( os.indexOf( "mac" ) >= 0 )
             {
-                rt.exec( "open " + urlTrimmed );
+                rt.exec( "open " + url );
             }
             else if ( os.indexOf( "nix" ) >= 0 || os.indexOf( "nux" ) >= 0 )
             {
@@ -313,7 +313,7 @@ public class Searcher
                 StringBuffer cmd = new StringBuffer();
                 for ( int i = 0; i < browsers.length; i++ )
                     cmd.append(
-                        ( i == 0 ? "" : " || " ) + browsers[i] + " \"" + urlTrimmed + "\" " );
+                        ( i == 0 ? "" : " || " ) + browsers[i] + " \"" + url + "\" " );
 
                 rt.exec( new String[] { "sh", "-c", cmd.toString() } );
             }
