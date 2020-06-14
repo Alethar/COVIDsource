@@ -48,13 +48,13 @@ public class Searcher
      *         connection)
      * @TODO change the subtext input for the articles.add
      */
-    public Object getSources( String[] searchTerms, int amount )
+    public Object getSources( ArrayList<String> searchTerms, int amount )
     {
         String searchURL = GOOGLE_SEARCH_URL;
-        for ( int i = 0; i < searchTerms.length; i++ )
+        for ( int i = 0; i < searchTerms.size(); i++ )
         {
-            searchURL += searchTerms[i];
-            if ( i != searchTerms.length )
+            searchURL += searchTerms.get( i );
+            if ( i != searchTerms.size() )
             {
                 searchURL += "+";
             }
