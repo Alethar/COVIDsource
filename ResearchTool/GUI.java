@@ -108,6 +108,7 @@ public class GUI extends JFrame {
 		JPanel searchResults = new JPanel();
 		searchResults.setLayout(new GridBagLayout());
 		searchResults.setBackground(Color.white);
+		
 		addSearchResult(searchResults);
 
 		searchArea.add(searchResults, BorderLayout.CENTER);
@@ -169,9 +170,14 @@ public class GUI extends JFrame {
 		checkBoxGBC.weightx = 0.5;
 		container.add(checkBox, checkBoxGBC);
 	}
+	
+	public void loadSearchResults() {
+	}
 
-	public void addSearchResult(JPanel container) {
+	public void addSearchResult(Article article, JPanel container) {
 		System.out.println("TODO: insert search result.");
+		
+		
 	}
 	
 	public String getSearchBarContent() {
