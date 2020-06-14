@@ -38,6 +38,7 @@ public class GUI extends JFrame {
 		this.searcher = searcher;
 		setVisible(true);
 		setSize(1600, 900);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		mainArea = new JPanel();
 		mainArea.setLayout(new BorderLayout());
