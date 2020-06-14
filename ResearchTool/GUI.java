@@ -149,6 +149,8 @@ public class GUI extends JFrame {
 		JPanel articleDropoff = new JPanel();
 		JLabel dropoffLabel = new JLabel("OMNOMNOMNOMNOM");
 		dropoffLabel.setFont(new Font(logoText.getFont().getName(), Font.BOLD, 25));
+		dropoffLabel.addMouseListener(new ArticleReleaseListener(this, searcher));
+		
 		articleDropoff.setBackground(Color.green);
 		
 		articleDropoff.add(dropoffLabel);

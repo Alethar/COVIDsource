@@ -1,30 +1,27 @@
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-public class ArticleSelectListener implements MouseListener {
-
+public class ArticleReleaseListener implements MouseListener {
+	
 	private GUI gui;
 	private Searcher searcher;
 	
-	ArticleSelectListener (GUI g, Searcher s) {
+	ArticleReleaseListener (GUI g, Searcher s) {
 		gui = g;
 		searcher = s;
 	}
 	
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		//Assign url to mouse
-
-		Mouse.hasURL = true;
-		
-		JPanel panel = (JPanel) e.getSource();
-		JLabel urlLabel = (JLabel) panel.getComponent(2);
-		Mouse.url = urlLabel.getText();
-		
-		System.out.println(Mouse.url + " picked up");
+		if (Mouse.hasURL) {
+			System.out.println(Mouse.url+" released");
+			Mouse.hasURL = false;
+			
+			//TODO: Deliver article to some backend (note that article has been lost by this point, 
+			// 					find some way to attach the article to the JPanel).
+			
+			Mouse.url = "";
+		}
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
@@ -37,13 +34,14 @@ public class ArticleSelectListener implements MouseListener {
 		
 	}
 
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-	}
-
-	public void mouseReleased(MouseEvent arg0) {
+	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	//NOTE: OVERRIDES CAUSE PROBLEMS
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
 	}
 
 }

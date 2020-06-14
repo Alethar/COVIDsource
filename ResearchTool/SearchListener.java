@@ -1,12 +1,12 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SearchAction implements ActionListener {
+public class SearchListener implements ActionListener {
 	
 	private GUI gui;
 	private Searcher searcher;
 	
-	SearchAction (GUI g, Searcher s) {
+	SearchListener (GUI g, Searcher s) {
 		gui = g;
 		searcher = s;
 	}
