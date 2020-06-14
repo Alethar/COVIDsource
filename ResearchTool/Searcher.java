@@ -13,6 +13,8 @@ public class Searcher
     private GUI gui;
     private String[] sourceNames;
     private String[] sourceSampleText;
+    private String[] newsNames = {"a", "b", "c"};
+    private double[] newsCred = {4.5, 5, 4};
     public Searcher() {
         
     }
