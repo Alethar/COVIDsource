@@ -11,7 +11,7 @@ import org.jsoup.select.Elements;
 
 public class Searcher
 {
-    private static final String GOOGLE_SEARCH_URL = "https://www.google.com/search?q=";
+    private final String GOOGLE_SEARCH_URL = "https://www.google.com/search?q=";
 
     // http://www.google.com/search?q=abc+def searches for "abc def"
     private GUI gui;
@@ -47,9 +47,8 @@ public class Searcher
      *         connection)
      * @TODO change the subtext input for the articles.add
      */
-    public Object getSources( String searchterm, int amount )
+    public Object getSources( String[] searchTerms, int amount )
     {
-        String[] searchTerms = searchterm.split( " " );
         String searchURL = GOOGLE_SEARCH_URL;
         for ( int i = 0; i < searchTerms.length; i++ )
         {
