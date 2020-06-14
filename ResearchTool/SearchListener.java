@@ -13,6 +13,8 @@ public class SearchListener implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
+		searcher.clearSources();
+		
 		String searchTerm = gui.getSearchBarContent();
 		System.out.println("Searched for: "+searchTerm);
 		
@@ -20,9 +22,10 @@ public class SearchListener implements ActionListener {
 		String[] termsArr = searchTerm.split(" ");
 		ArrayList<String> terms = new ArrayList<>();
 		for (String str: termsArr) terms.add(str);
-		
-		searcher.getSources(terms, 10);
+
+		searcher.getSources(terms, 30);
 		//TODO: Throw error if getSources returns something other than Null
+				
 		
 		//Now tell GUI to load some stuff
 		gui.loadSearchResults();

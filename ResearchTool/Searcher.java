@@ -140,7 +140,14 @@ public class Searcher
         // Document doc =
         // Jsoup.connect(searchURL).userAgent("Mozilla/5.0").get();
     }
-
+    
+    /**
+     * Clears source cache
+     */
+    public void clearSources() {
+    	System.out.println("Sources cleared");
+    	articles = new ArrayList<>();
+    }
 
     /**
      * 
@@ -191,5 +198,47 @@ public class Searcher
         }
 
         return -1;
+    }
+    
+    
+    /**
+     * Code ripped from https://mkyong.com/java/open-browser-in-java-windows-or-linux/
+     * @param url: url of the tab to open
+     */
+    static public void openBrowserTab(String url) {
+    	String os = System.getProperty("os.name").toLowerCase();
+    	Runtime rt = Runtime.getRuntime();
+    	
+    	String urlTrimmed = url.substring(1);
+    	
+    	try {
+    		if (os.indexOf("win") >= 0) {
+    			
+    			//Doesn't support urls like page.html#nameLink, maybe just delete those?
+    			rt.exec("rundll32 url.dll,FileProtocolHandler " + urlTrimmed);
+    		} 
+    		else if (os.indexOf("mac") >= 0) {
+    			rt.exec ("open " + urlTrimmed);
+    		} 
+    		else if (os.indexOf("nix") >= 0 || os.indexOf("nux") >= 0) {
+    			//Best guess for unix platforms, when it comes to browsers
+    			String[] browsers = {"epiphany", "firefox", "mozilla", "konqueror",
+  			             "netscape","opera","links","lynx"};
+    			
+    			//Build a command
+    			StringBuffer cmd = new StringBuffer();
+    	        for (int i=0; i<browsers.length; i++)
+    	            cmd.append( (i==0  ? "" : " || " ) + browsers[i] +" \"" + urlTrimmed + "\" ");
+
+    	        rt.exec(new String[] { "sh", "-c", cmd.toString() });
+    		} else {
+    			System.out.println("Something is horribly borked");
+    			return;
+    		}
+    	}
+    	catch (Exception e){
+    		System.out.println("bork");
+    		return;
+    	}
     }
 }

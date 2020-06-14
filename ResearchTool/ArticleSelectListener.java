@@ -25,6 +25,8 @@ public class ArticleSelectListener implements MouseListener {
 		Mouse.url = urlLabel.getText();
 		
 		System.out.println(Mouse.url + " picked up");
+		
+		Searcher.openBrowserTab(Mouse.url);
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
