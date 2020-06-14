@@ -9,16 +9,16 @@ public class NewsArticle extends Article
 
     private String info;
 
-    private int cred;
+    private double cred;
 
-    private int bias;
+    private double bias;
 
 
-    public NewsArticle( String name, String sampleText, String url, int cred, int bias )
+    public NewsArticle( String name, String sampleText, String url, double newsCred, double newsBias )
     {
         super( name, sampleText, url );
-        this.cred = cred;
-        this.bias = bias;
+        this.cred = newsCred;
+        this.bias = newsBias;
     }
 
 
@@ -43,7 +43,7 @@ public class NewsArticle extends Article
      * 
      * @return
      */
-    public int getCred()
+    public double getCred()
     {
         return cred;
 
@@ -56,7 +56,7 @@ public class NewsArticle extends Article
      * 
      * @return
      */
-    public int getBias()
+    public double getBias()
     {
         return bias;
     }
