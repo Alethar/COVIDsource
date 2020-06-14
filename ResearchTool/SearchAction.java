@@ -14,7 +14,7 @@ public class SearchAction implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		String searchTerm = gui.getSearchBarContent();
 		System.out.println("Searched for: "+searchTerm);
-		searcher.getSources(searchTerm, 10);
+		searcher.getSources(searchTerm.split(" "), 10);
 		//TODO: Throw error if getSources returns something other than Null
 		
 		//Now tell GUI to load some stuff
