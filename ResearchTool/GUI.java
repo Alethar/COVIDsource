@@ -12,9 +12,9 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
@@ -38,7 +38,7 @@ public class GUI extends JFrame {
 		this.searcher = searcher;
 		setVisible(true);
 		setSize(1600, 900);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
 		mainArea = new JPanel();
 		mainArea.setLayout(new BorderLayout());
@@ -65,8 +65,11 @@ public class GUI extends JFrame {
 		// by updateComponentTreeUI
 		// And updateComponentTreeUI is to load the page
 		// All because JTextField breaks absolutely everything
-		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		SwingUtilities.updateComponentTreeUI(this);
+		//SwingUtilities.updateComponentTreeUI(this);
+		
+		revalidate();
+		repaint();
+		
 	}
 	
 	
@@ -105,8 +108,9 @@ public class GUI extends JFrame {
 		searchResults.setLayout(new BoxLayout(searchResults, BoxLayout.Y_AXIS));
 		searchResults.setBackground(Color.white);
 		searchResults.setBorder(new EmptyBorder(20, 50, 0, 0));
-
-		searchArea.add(searchResults, BorderLayout.CENTER);
+		
+		JScrollPane searchResultsScroll = new JScrollPane(searchResults);
+		searchArea.add(searchResultsScroll, BorderLayout.CENTER);
 	}
 
 	/**
@@ -180,6 +184,12 @@ public class GUI extends JFrame {
 	
 	//Loads all search results
 	public void loadSearchResults() {
+		//Clear existing cache
+		searchResults.removeAll();
+		searchResults.revalidate();
+		searchResults.repaint();
+		
+		//Load in new
 		for (int i=0; i<searcher.getArticleNum(); i++) {
 			Article art = searcher.getArticle(i);
 			System.out.println(art.getName());
@@ -187,7 +197,11 @@ public class GUI extends JFrame {
 			addSearchResult(art, searchResults);
 		}
 		
-		SwingUtilities.updateComponentTreeUI(this);
+		//SwingUtilities.updateComponentTreeUI(this);
+		revalidate();
+		repaint();
+		
+		System.out.println(searcher.getArticleNum());
 	}
 
 	public void addSearchResult(Article article, JPanel container) {
