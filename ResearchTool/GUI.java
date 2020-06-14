@@ -1,5 +1,23 @@
-import java.awt.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.border.EmptyBorder;
 
 
 public class GUI extends JFrame
@@ -9,15 +27,15 @@ public class GUI extends JFrame
 	private JPanel taskArea;
 	private JPanel mainArea;
 	
-    private JPanel searchbox;
-    private JPanel searchtags;
-    private JPanel searchpanels;
+	private JTextField searchBar;
+	private JButton searchButton;
     
-    public GUI(Searcher searcher) {
+    public GUI(Searcher searcher) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
     	super("Researcher");
     	this.searcher = searcher;
     	setVisible(true);
     	setSize(1600, 900);
+    	
     	
     	mainArea = new JPanel();
     	mainArea.setLayout(new BorderLayout());
@@ -26,7 +44,7 @@ public class GUI extends JFrame
     	taskArea = new JPanel();
     	searchArea = new JPanel();
     	
-    	searchArea.setBackground(Color.white);
+    	//searchArea.setBackground(Color.white);
     	taskArea.setBackground(Color.gray);
 
     	JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, searchArea, taskArea);
@@ -37,8 +55,46 @@ public class GUI extends JFrame
     	
     	mainArea.add(splitPane, BorderLayout.CENTER);
     	
+    	initSearch();
+    	initTaskbar();
     	
+    	//Apparently, setting the look and feel is necessary to avoid an error thrown by updateComponentTreeUI
+    	//And updateComponentTreeUI is to load the page
+    	//All because JTextField breaks absolutely everything
+    	UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+    	SwingUtilities.updateComponentTreeUI(this);
+    }
+    
+    private void initSearch() {
+    	//Configuring overall JPanel
+    	searchArea.setLayout(new BorderLayout());
     	
+    	//Top bar (includes search bar and the button with it)
+    	JPanel topBar = new JPanel();
+    	topBar.setLayout(new BoxLayout(topBar, BoxLayout.Y_AXIS));
+    	topBar.setBorder(new EmptyBorder(0, 30, 0, 0));
+    	topBar.add(Box.createRigidArea(new Dimension(0, 15)));
+    	
+    	//Adding items to top
+    	searchBar = new JTextField(20);
+    	topBar.add(searchBar);
+    	JButton searchButton = new JButton("Search");
+    	topBar.add(searchButton);
+    	
+    	//Assinging top bar to whole area container 
+    	//(NOTE: This has to happen after topBar is fully constructed, otherwise it will throw an error.)
+    	searchArea.add(topBar, BorderLayout.NORTH);
+    	
+    	//Search results
+		JPanel searchResults = new JPanel();
+		searchResults.setLayout(new GridBagLayout());
+		searchResults.setBackground(Color.white);
+		addSearchResult(searchResults);
+		
+		searchArea.add(searchResults, BorderLayout.CENTER);
+    }
+    
+    private void initTaskbar() {
     	//Sidebar
     	taskArea.setLayout(new BorderLayout());
     	JPanel taskAreaContent = new JPanel();
@@ -68,12 +124,8 @@ public class GUI extends JFrame
     	articleDropoff.setBackground(Color.green);
     	taskAreaContent.add(articleDropoff);
     }
-    
+
     public void addTask(String taskText, JPanel container) {
-    	if (!(container.getLayout() instanceof GridBagConstraints)) {
-    		System.out.println("ERROR: Wrong layout type.");
-    	}
-    	
     	int rows = container.getComponentCount()/2;
     	
     	JLabel task = new JLabel(taskText);
@@ -89,5 +141,9 @@ public class GUI extends JFrame
     	checkBoxGBC.gridy = rows;
     	checkBoxGBC.weightx = 0.5;
     	container.add(checkBox, checkBoxGBC);
+    }
+    
+    public void addSearchResult(JPanel container) {
+    	System.out.println("TODO: insert search result.");
     }
 }
