@@ -1,4 +1,7 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -29,8 +32,8 @@ public class Searcher
     public Searcher()
     {
         // does absolutely fin nothing
-    	//Not anymore
-    	articles = new ArrayList<>();
+        // Not anymore
+        articles = new ArrayList<>();
     }
 
 
@@ -69,10 +72,27 @@ public class Searcher
             Elements results = webpage.select( "a.BVG0Nb" );
             for ( Element result : results )
             {
-                String linkHref = result.attr( "href" );
-                String linkText = result.text();
-                String author = result.select( "div.BNeawe.tAd8D.AP7Wnd" ).first().text();
-                String title = result.select( "span" ).first().text();
+                String author;
+                String linkHref;
+                String title;
+                try
+                {
+                    linkHref = result.attr( "href" );
+                    String linkText = result.text();
+                    author = result.select( "div.BNeawe.tAd8D.AP7Wnd" ).first().text();
+
+                    PrintWriter out = new PrintWriter(
+                        new BufferedWriter( new FileWriter( "test.out" ) ) );
+                    out.print( result.toString() );
+                    out.println();
+                    out.close();
+                    title = result.select( "span" ).first().text();
+
+                }
+                catch ( NullPointerException noooo )
+                {
+                    continue;
+                }
                 String link = linkHref.substring( 6, linkHref.indexOf( "&" ) );
                 String smalllink = link.split( "/" )[2];
                 int newsID = isNews( smalllink );
@@ -88,13 +108,17 @@ public class Searcher
                 }
                 else
                 { // general article
-                	System.out.println("Title: " + title);
-                	System.out.println("link: " + link);
-                	System.out.println("smalllink: " + smalllink);
-                	System.out.println("author: " + author);
-                	
-                	Article newArticle = new Article( title, ""/* @TODO subtext */, link, smalllink, author );
-                	articles.add( newArticle );
+                    System.out.println( "Title: " + title );
+                    System.out.println( "link: " + link );
+                    System.out.println( "smalllink: " + smalllink );
+                    System.out.println( "author: " + author );
+
+                    Article newArticle = new Article( title,
+                        ""/* @TODO subtext */,
+                        link,
+                        smalllink,
+                        author );
+                    articles.add( newArticle );
                 }
                 // System.out.println( "Text::" + linkText + ", URL::" + link);
             }
