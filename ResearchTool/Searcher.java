@@ -11,8 +11,7 @@ public class Searcher
     private static final String GOOGLE_SEARCH_URL = "https://www.google.com/search?q=";
     //http://www.google.com/search?q=abc+def searches for "abc def"
     private GUI gui;
-    private String[] sourceNames;
-    private String[] sourceSampleText;
+    private Article[] articles;
     private String[] newsNames = {"a", "b", "c"};
     private double[] newsCred = {4.5, 5, 4};
     public Searcher() {
@@ -26,7 +25,7 @@ public class Searcher
      * Gets the required amount of sources and loads info into class variable
      * @param amount of sources you want
      */
-    public void getSources(int amount) {
+    public void getSources(String searchterm, int amount) {
         
     }
 }
