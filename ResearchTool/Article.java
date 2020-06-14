@@ -5,6 +5,8 @@ public class Article
 
     private String sampleText;
 
+    private String url;
+
 
     /**
      * Contructor initiaizes variables
@@ -12,10 +14,11 @@ public class Article
      * @param name
      * @param sampleText
      */
-    public Article( String name, String sampleText )
+    public Article( String name, String sampleText, String url )
     {
         this.name = name;
         this.sampleText = sampleText;
+        this.url = url;
     }
 
 
@@ -40,5 +43,17 @@ public class Article
     public String getSampleText()
     {
         return sampleText;
+    }
+
+
+    /**
+     * 
+     * Accessor method for article url
+     * 
+     * @return
+     */
+    public String getURL()
+    {
+        return url;
     }
 }
