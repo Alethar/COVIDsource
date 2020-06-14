@@ -104,9 +104,6 @@ public class GUI extends JFrame {
 		searchResults.setLayout(new BoxLayout(searchResults, BoxLayout.Y_AXIS));
 		searchResults.setBackground(Color.white);
 		searchResults.setBorder(new EmptyBorder(20, 50, 0, 0));
-		
-		addSearchResult(new Article("Name", "SAAAAAMMMMPPPPLLEEE TEEXXXTTTTT", "url.com", "url", "bob"), searchResults);
-		addSearchResult(new Article("Naem", "SAAAAAMMMMPPPPLLEEE TEEXXXTTTTT", "url.com", "url", "tim"), searchResults);
 
 		searchArea.add(searchResults, BorderLayout.CENTER);
 	}
@@ -188,11 +185,11 @@ public class GUI extends JFrame {
 			
 			addSearchResult(art, searchResults);
 		}
+		
+		SwingUtilities.updateComponentTreeUI(this);
 	}
 
 	public void addSearchResult(Article article, JPanel container) {
-		System.out.println("TODO: insert search result.");
-		
 		JPanel parent = new JPanel();
 		parent.setLayout(new BoxLayout(parent, BoxLayout.Y_AXIS));
 		parent.addMouseListener(new ArticleSelectListener(this, searcher));
