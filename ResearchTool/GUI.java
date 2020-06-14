@@ -136,7 +136,9 @@ public class GUI extends JFrame {
 		taskAreaContent.add(Box.createRigidArea(new Dimension(0, 50)));
 		
 		// Daily Tasks
-		JPanel dailyTasks = new JPanel(new GridBagLayout());
+		JPanel dailyTasks = new JPanel();
+		dailyTasks.setLayout(new BoxLayout(dailyTasks, BoxLayout.Y_AXIS));
+		
 		// dailyTasks.setBackground(Color.red);
 		addTask("Reclaim the holy lands: COMPLETE", dailyTasks);
 		addTask("taskB", dailyTasks);
@@ -167,7 +169,7 @@ public class GUI extends JFrame {
 	 * @param container: the container (with a GridBagLayout) holding the task
 	 */
 	public void addTask(String taskText, JPanel container) {
-		int rows = container.getComponentCount() / 2;
+		/*int rows = container.getComponentCount() / 2;
 
 		JLabel task = new JLabel(taskText);
 		GridBagConstraints taskGBC = new GridBagConstraints();
@@ -181,7 +183,10 @@ public class GUI extends JFrame {
 		checkBoxGBC.gridx = 1;
 		checkBoxGBC.gridy = rows;
 		checkBoxGBC.weightx = 0.5;
-		container.add(checkBox, checkBoxGBC);
+		container.add(checkBox, checkBoxGBC);*/
+		
+		JTask task = new JTask(taskText);
+		container.add(task);
 	}
 	
 	//Loads all search results
