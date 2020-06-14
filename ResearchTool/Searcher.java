@@ -11,6 +11,8 @@ import org.jsoup.select.Elements;
 
 public class Searcher
 {
+	public static Searcher main;
+	
     private static final String GOOGLE_SEARCH_URL = "https://www.google.com/search?q=";
 
     // http://www.google.com/search?q=abc+def searches for "abc def"
@@ -28,6 +30,11 @@ public class Searcher
     public Searcher()
     {
         // does absolutely fin nothing
+    	// Not anymoree
+    	if (main == null) main=this;
+		else {
+			System.out.println("ERROR: SEARCHER SINGLETON BREACHED");
+		}
     }
 
 
