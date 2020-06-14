@@ -7,7 +7,8 @@ public class SearchAction implements ActionListener {
 	private Searcher searcher;
 	
 	SearchAction (GUI g, Searcher s) {
-		
+		gui = g;
+		searcher = s;
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
@@ -15,6 +16,9 @@ public class SearchAction implements ActionListener {
 		System.out.println("Searched for: "+searchTerm);
 		searcher.getSources(searchTerm, 10);
 		//TODO: Throw error if getSources returns something other than Null
+		
+		//Now tell GUI to load some stuff
+		gui.loadSearchResults();
 	}
 
 }
