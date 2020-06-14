@@ -24,10 +24,10 @@ public class GUI extends JFrame {
 	private JPanel searchArea;
 	private JPanel taskArea;
 	private JPanel mainArea;
-
-	private JTextField searchBar;
-	private JButton searchButton;
-
+	
+	/**
+	 * Initialize GUI Elements. This block handles the frame and the overall layout.
+	 */
 	public GUI(Searcher searcher) throws ClassNotFoundException, InstantiationException, IllegalAccessException,
 			UnsupportedLookAndFeelException {
 		super("Researcher");
@@ -63,7 +63,11 @@ public class GUI extends JFrame {
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		SwingUtilities.updateComponentTreeUI(this);
 	}
-
+	
+	
+	/**
+	 * Initializes the left part of the page
+	 */
 	private void initSearch() {
 		// Configuring overall JPanel
 		searchArea.setLayout(new BorderLayout());
@@ -75,12 +79,12 @@ public class GUI extends JFrame {
 		topBar.add(Box.createRigidArea(new Dimension(0, 15)));
 
 		// Adding items to top
-		searchBar = new JTextField(20);
+		JTextField searchBar = new JTextField(20);
 		topBar.add(searchBar);
 		JButton searchButton = new JButton("Search");
 		topBar.add(searchButton);
 
-		// Assinging top bar to whole area container
+		// Assigning top bar to whole area container
 		// (NOTE: This has to happen after topBar is fully constructed, otherwise it
 		// will throw an error.)
 		searchArea.add(topBar, BorderLayout.NORTH);
@@ -94,6 +98,9 @@ public class GUI extends JFrame {
 		searchArea.add(searchResults, BorderLayout.CENTER);
 	}
 
+	/**
+	 * Initializes the right part of the page
+	 */
 	private void initTaskbar() {
 		// Sidebar
 		taskArea.setLayout(new BorderLayout());
@@ -124,7 +131,12 @@ public class GUI extends JFrame {
 		articleDropoff.setBackground(Color.green);
 		taskAreaContent.add(articleDropoff);
 	}
-
+	
+	/**
+	 * Adds a task onto a list of tasks
+	 * @param taskText: the text meant to be inside the task
+	 * @param container: the container (with a GridBagLayout) holding the task
+	 */
 	public void addTask(String taskText, JPanel container) {
 		int rows = container.getComponentCount() / 2;
 
