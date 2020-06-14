@@ -18,9 +18,9 @@ public class Searcher
     private ArrayList<Article> articles;
 
     private String[] newsNames = { "a", "b", "c" };
-    
-    private String[] newsURLs = { "www.google.com", "www.reddit.com", "www.bing.com"};
-    
+
+    private String[] newsURLs = { "www.google.com", "www.reddit.com", "www.bing.com" };
+
     private double[] newsCred = { 4.5, 5, 4 };
 
     private double[] newsBias = { 4.5, 5, 4 };
@@ -64,25 +64,29 @@ public class Searcher
         try
         {
             Document webpage = Jsoup.connect( searchURL ).userAgent( "Mozilla/5.0" ).get();
-            Elements results = webpage.select( "h3.r > a" );
+            Elements results = webpage.select( "a.BVG0Nb" );
             for ( Element result : results )
             {
                 String linkHref = result.attr( "href" );
                 String linkText = result.text();
+                String author = result.select( "div.BNeawe.tAd8D.AP7Wnd" ).first().text();
+                String title = result.select( "span" ).first().text();
                 String link = linkHref.substring( 6, linkHref.indexOf( "&" ) );
-                int newsID = isNews( link.split( "/" )[2]  );
+                String smalllink = link.split( "/" )[2];
+                int newsID = isNews( smalllink );
                 if ( newsID != -1 )
                 { // news article
-                    articles.add( new NewsArticle( newsNames[newsID],
-                        ""/* @TODO */,
+                    articles.add( new NewsArticle( title,
+                        ""/* @TODO subtext */,
                         link,
+                        smalllink,
+                        author,
                         newsCred[newsID],
                         newsBias[newsID] ) );
                 }
                 else
                 { // general article
-                    articles
-                        .add( new Article( link.split( "/" )[2], ""/* @TODO */, link ) );
+                    articles.add( new Article( title, ""/* @TODO subtext */, link, smalllink, author ) );
                 }
                 // System.out.println( "Text::" + linkText + ", URL::" + link);
             }
@@ -134,17 +138,21 @@ public class Searcher
     /**
      * 
      * checks the article link to see if the news name is included
+     * 
      * @param url
      * @return
      */
-    private int isNews(String url) {
-//        url = url.split( "." )[1];
-        for(int i = 0; i< newsURLs.length; i++) {
-            if(url.contains(newsURLs[i])) {
+    private int isNews( String url )
+    {
+        // url = url.split( "." )[1];
+        for ( int i = 0; i < newsURLs.length; i++ )
+        {
+            if ( url.contains( newsURLs[i] ) )
+            {
                 return i;
             }
         }
-        
+
         return -1;
     }
 }
