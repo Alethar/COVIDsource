@@ -5,25 +5,22 @@ public class ArticleHolder
     private ArrayList<Article> articles;
     public ArticleHolder() {
         articles = new ArrayList<Article>();
-    }
-    
-    public void cloneArticle(Article article) {
-        if (article.getClass().getName().equals("Article")) {
-        	articles.add(new Article(article));
-        }
-        else if (article.getClass().getName().equals("NewsArticle")) {
-        	articles.add(new NewsArticle((NewsArticle) article));
-        }
-        else {
-        	System.out.println("ERROR: FOREIGN ARTICLE TYPE");
-        }
-    }
+    } 
     
     public ArrayList<Article> getArticles(){
         return articles;
     }
     
-    public void addArticle(Article article) {
+    /**
+     * 
+     * DO NOT USE
+     * @param article
+     */
+    public void addArticle(Article article) { //USE cloneArticle
     	articles.add(article);
+    }
+    public Article removeArticle(int index) {
+        Article a = articles.remove( index );
+        return a;
     }
 }
