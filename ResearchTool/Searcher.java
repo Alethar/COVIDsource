@@ -36,17 +36,17 @@ public class Searcher {
             "tampa.cbslocal.com", "washington.cbslocal.com", "sanfrancisco.cbslocal.com", "boston.cbslocal.com",
             "philadelphia.cbslocal.com", "chicago.cbslocal.com", "losangeles.cbslocal.com", "dfw.cbslocal.com",
             "minnesota.cbslocal.com", "detroit.cbslocal.com", "newyork.cbslocal.com", "abc7news.com", "abc13.com",
-            "www.news10.com", "www.cdc.gov", "www.statnews.com", "www.who.int" };
+            "www.news10.com", "www.cdc.gov", "www.statnews.com", "www.who.int", "www.cnn.com", "independent.co.uk" };
 
     private int[] newsCred = { 2, 4, 2, 2, 4, 5, 4, 5, 4, 2, 2, 4, 4, 4, 2, 2, 4, 4, 4, 4, 4, 2, 4, 4, 4, 4, 4, 4, 4, 4,
             4, 4, 4, 4, 4, 4, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 4, 4, 4,
-            4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 4, 4 }; // 0 to 5, 0 is not
+            4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 4, 4 , 2, 2}; // 0 to 5, 0 is not
     // credible and 5 is
     // credible
 
     private double[] newsBias = { 1.2, 2, 1, 5, 2.5, 3, 2, 2.5, 2, 6, 4.4, 2, 2, 2, 1, 2, 3.8, 2, 2.5, 2, 2, 4.4, 2, 3,
             4.2, 2.5, 2, 2, 3, 2, 3.8, 3.8, 2.5, 1.5, 2.5, 1.8, 0.4, 1, 3.8, 1.6, 2.8, 2, 1, 2.2, 1.5, 1, 2.5, 2, 2.9,
-            4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 5, 5, 5, 5, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2.8, 3 }; // 0 to 6,
+            4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 5, 5, 5, 5, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2.8, 3, 1.2, 1.2 }; // 0 to 6,
     // 0 is
     // left and
     // 6 is
