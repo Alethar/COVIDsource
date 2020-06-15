@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.MouseListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -20,6 +21,7 @@ public class JArticlePanel extends JPanel{
 		
 		//Save Button
 		JButton saveButton = new JButton("Save");
+		saveButton.addMouseListener( new AddArticleListener(article) );
 		saveButton.setBorder(new EmptyBorder(0, 5, 0, 25));
 		add(saveButton, BorderLayout.WEST);
 		
