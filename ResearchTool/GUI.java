@@ -40,7 +40,7 @@ public class GUI extends JFrame {
 	public GUI() throws ClassNotFoundException, InstantiationException, IllegalAccessException,
 			UnsupportedLookAndFeelException {
 		super("Researcher");
-		this.searcher = searcher;
+		searcher = Main.s;
 		setVisible(true);
 		setSize(1600, 900);
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -93,7 +93,7 @@ public class GUI extends JFrame {
 		
 
 		// Adding items to top
-		SearchListener searchAction = new SearchListener(this, searcher);
+		SearchListener searchAction = new SearchListener();
 		
 		searchBar = new JTextField(20);
 		searchBar.addActionListener(searchAction);

@@ -3,16 +3,14 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class SearchListener implements ActionListener {
-	
-	private GUI gui;
-	private Searcher searcher;
-	
-	SearchListener (GUI g, Searcher s) {
-		gui = g;
-		searcher = s;
+
+	SearchListener () {
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
+		Searcher searcher = Main.s;
+		GUI gui = Main.g;
+		
 		searcher.clearSources();
 		
 		String searchTerm = gui.getSearchBarContent();
