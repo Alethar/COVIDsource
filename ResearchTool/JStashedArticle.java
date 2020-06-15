@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 
 public class JStashedArticle extends JPanel {
 	
-	private Article art;
+	public Article art;
 	
 	JStashedArticle (Article art) {
 		super();
@@ -16,6 +16,7 @@ public class JStashedArticle extends JPanel {
 		setLayout(new BorderLayout());
 		
 		JButton delButton = new JButton("Del");
+		delButton.addMouseListener(new RemArticleListener(art));
 		add(delButton, BorderLayout.WEST);
 		
 		JLabel title = new JLabel(art.getName());

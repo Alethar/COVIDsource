@@ -33,7 +33,6 @@ public class GUI extends JFrame {
 	private JPanel ArticleHolderArea;
 	
 	private Main main;
-	private ArrayList<JStashedArticle> stashedArticles;
 	
 	/**
 	 * Initialize GUI Elements. This block handles the frame and the overall layout.
@@ -49,8 +48,7 @@ public class GUI extends JFrame {
 		mainArea = new JPanel();
 		mainArea.setLayout(new BorderLayout());
 		add(mainArea);
-		
-		stashedArticles = new ArrayList();
+
 		taskArea = new JPanel();
 		searchArea = new JPanel();
 
@@ -253,12 +251,37 @@ public class GUI extends JFrame {
 	}
 	
 	public void stashArticle(Article art) {
+		//Avoid duplicates
+		Component[] stashedArts = ArticleHolderArea.getComponents();
+		for (int i=0; i<stashedArts.length; i++) {
+			JStashedArticle stashedArt = (JStashedArticle) stashedArts[i];
+			
+			//Wee, using references. This won't cause a problem at all.
+			if (art == stashedArt.art) {
+				System.out.println("DUPLICATE DETECTED, ABORTING");
+				return;
+			}
+		}
+		
 		JStashedArticle stashedArt = new JStashedArticle(art);
 		ArticleHolderArea.add(stashedArt);
 		ArticleHolderArea.revalidate();
 		ArticleHolderArea.repaint();
 		System.out.println("hi");
-		
-		stashedArticles.add(stashedArt);
+	}
+
+	public void removeStashedArticle(Article art) {
+		Component[] stashedArts = ArticleHolderArea.getComponents();
+		for (int i=0; i<stashedArts.length; i++) {
+			JStashedArticle stashedArt = (JStashedArticle) stashedArts[i];
+			
+			//Wee, using references. This won't cause a problem at all.
+			if (art == stashedArt.art) {
+				ArticleHolderArea.remove(stashedArt);
+				ArticleHolderArea.revalidate();
+				ArticleHolderArea.repaint();
+				break;
+			}
+		}
 	}
 }
