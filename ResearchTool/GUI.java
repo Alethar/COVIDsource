@@ -165,6 +165,19 @@ public class GUI extends JFrame {
 
 		taskAreaContent.add(dailyTasks);
 		
+		//Add tasks from here
+		JPanel addTaskPanel = new JPanel(new BorderLayout());
+		JTextField addTaskField = new JTextField();
+		addTaskPanel.add(addTaskField, BorderLayout.CENTER);
+		
+		JButton addTaskButton = new JButton("Add");
+		addTaskPanel.add(addTaskButton, BorderLayout.EAST);
+		
+		addTaskButton.addActionListener(new AddTaskListener(addTaskField));
+		addTaskField.addActionListener(new AddTaskListener(addTaskField));
+		
+		taskAreaContent.add(addTaskPanel);
+		
 		//Spacing
 		taskAreaContent.add(Box.createRigidArea(new Dimension(0, 50)));
 		
@@ -201,6 +214,9 @@ public class GUI extends JFrame {
 	public void addTask(Task task) {
 		JTask t = new JTask(task, this, Main.s);
 		dailyTasks.add(t);
+		
+		dailyTasks.revalidate();
+		dailyTasks.repaint();
 	}
 	
 	public void removeTask(int id) {
