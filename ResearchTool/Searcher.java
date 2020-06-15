@@ -99,7 +99,7 @@ public class Searcher {
             out.println();
             out.close();
             for (Element result : results) {
-                System.out.println(result.toString());
+                //System.out.println(result.toString());
                 String author;
                 String linkHref;
                 String title;
@@ -157,12 +157,20 @@ public class Searcher {
 
                     continue;
                 }
-                System.out.println(result.toString());
+                //System.out.println(result.toString());
                 System.out.println(linkHref);
                 System.out.println(searchURL);
-
+                String smalllink;
                 String link = linkHref.substring(6, linkHref.indexOf("&"));
-                String smalllink = link.split("/")[2];
+                if(link.split("/").length > 2) {
+                    smalllink = link.split("/")[2];
+                }
+                else if(link.split("/").length > 1) {
+                    smalllink = link.split("/")[1];
+                }
+                else {
+                    smalllink = link;
+                }
                 int newsID = isNews(smalllink);
                 if (newsID != -1) { // news article
                     articles.add(new NewsArticle(title, ""/* @TODO subtext */, link.substring(1), smalllink, author,
@@ -182,6 +190,8 @@ public class Searcher {
             System.out.println(webpage.select("div[class=kCrYT]").size());
         } catch (Exception e) {
             System.out.println("LARGE ERROR");
+            System.out.println(e);
+            e.printStackTrace();
             return e;
         }
         System.out.println(searchURL);
@@ -260,14 +270,16 @@ public class Searcher {
         String os = System.getProperty("os.name").toLowerCase();
         Runtime rt = Runtime.getRuntime();
 
+        String urlTrimmed = url.substring(1);
+
         try {
             if (os.indexOf("win") >= 0) {
 
                 // Doesn't support urls like page.html#nameLink, maybe just
                 // delete those?
-                rt.exec("rundll32 url.dll,FileProtocolHandler " + url);
+                rt.exec("rundll32 url.dll,FileProtocolHandler " + urlTrimmed);
             } else if (os.indexOf("mac") >= 0) {
-                rt.exec("open " + url);
+                rt.exec("open " + urlTrimmed);
             } else if (os.indexOf("nix") >= 0 || os.indexOf("nux") >= 0) {
                 // Best guess for unix platforms, when it comes to browsers
                 String[] browsers = { "epiphany", "firefox", "mozilla", "konqueror", "netscape", "opera", "links",
@@ -276,7 +288,7 @@ public class Searcher {
                 // Build a command
                 StringBuffer cmd = new StringBuffer();
                 for (int i = 0; i < browsers.length; i++)
-                    cmd.append((i == 0 ? "" : " || ") + browsers[i] + " \"" + url + "\" ");
+                    cmd.append((i == 0 ? "" : " || ") + browsers[i] + " \"" + urlTrimmed + "\" ");
 
                 rt.exec(new String[] { "sh", "-c", cmd.toString() });
             } else {
