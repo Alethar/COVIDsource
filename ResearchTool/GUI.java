@@ -32,6 +32,7 @@ public class GUI extends JFrame {
 	private JTextField searchBar;
 	private JPanel searchResults;
 	private JPanel articleDropoff;
+	//private JPanel
 	
 	private Main main;
 	
@@ -172,6 +173,10 @@ public class GUI extends JFrame {
 		
 		articleDropoff.add(dropoffLabel);
 		taskAreaContent.add(articleDropoff);
+		
+		JPanel ArticleHolderArea = new JPanel();
+		ArticleHolderArea.setLayout(new BoxLayout(ArticleHolderArea, BoxLayout.Y_AXIS));
+		
 	}
 	
 	public void loadTasks() {

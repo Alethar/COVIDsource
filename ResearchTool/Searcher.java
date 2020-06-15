@@ -270,16 +270,14 @@ public class Searcher {
         String os = System.getProperty("os.name").toLowerCase();
         Runtime rt = Runtime.getRuntime();
 
-        String urlTrimmed = url.substring(1);
-
         try {
             if (os.indexOf("win") >= 0) {
 
                 // Doesn't support urls like page.html#nameLink, maybe just
                 // delete those?
-                rt.exec("rundll32 url.dll,FileProtocolHandler " + urlTrimmed);
+                rt.exec("rundll32 url.dll,FileProtocolHandler " + url);
             } else if (os.indexOf("mac") >= 0) {
-                rt.exec("open " + urlTrimmed);
+                rt.exec("open " + url);
             } else if (os.indexOf("nix") >= 0 || os.indexOf("nux") >= 0) {
                 // Best guess for unix platforms, when it comes to browsers
                 String[] browsers = { "epiphany", "firefox", "mozilla", "konqueror", "netscape", "opera", "links",
@@ -288,7 +286,7 @@ public class Searcher {
                 // Build a command
                 StringBuffer cmd = new StringBuffer();
                 for (int i = 0; i < browsers.length; i++)
-                    cmd.append((i == 0 ? "" : " || ") + browsers[i] + " \"" + urlTrimmed + "\" ");
+                    cmd.append((i == 0 ? "" : " || ") + browsers[i] + " \"" + url + "\" ");
 
                 rt.exec(new String[] { "sh", "-c", cmd.toString() });
             } else {
