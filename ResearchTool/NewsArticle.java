@@ -19,6 +19,13 @@ public class NewsArticle extends Article
         this.cred = newsCred;
         this.bias = newsBias;
     }
+    
+    public NewsArticle(NewsArticle art)
+    {
+        super(art);
+        this.cred = art.getCred();
+        this.bias = art.getBias();
+    }
 
 
     /**

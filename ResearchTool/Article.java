@@ -38,6 +38,14 @@ public class Article
         this.smallurl = smallurl;
         this.author = author;
     }
+    
+    public Article(Article art) {
+    	this.title = art.getName();
+        this.sampleText = art.getSampleText();
+        this.url = art.getURL();
+        this.smallurl = art.getSmallURL();
+        this.author = art.getAuthor();
+    }
 
 
     /**

@@ -6,10 +6,24 @@ public class ArticleHolder
     public ArticleHolder() {
         articles = new ArrayList<Article>();
     }
-    public void addArticle(Article article) {
-        articles.add( article.clone() );
+    
+    public void cloneArticle(Article article) {
+        if (article.getClass().getName().equals("Article")) {
+        	articles.add(new Article(article));
+        }
+        else if (article.getClass().getName().equals("NewsArticle")) {
+        	articles.add(new NewsArticle((NewsArticle) article));
+        }
+        else {
+        	System.out.println("ERROR: FOREIGN ARTICLE TYPE");
+        }
     }
+    
     public ArrayList<Article> getArticles(){
         return articles;
+    }
+    
+    public void addArticle(Article article) {
+    	articles.add(article);
     }
 }
