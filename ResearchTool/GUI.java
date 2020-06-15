@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -25,14 +26,18 @@ public class GUI extends JFrame {
 	private JPanel searchArea;
 	private JPanel taskArea;
 	private JPanel mainArea;
+	private JSplitPane splitPane;
+	private JPanel dailyTasks;
 	
 	private JTextField searchBar;
 	private JPanel searchResults;
 	
+	private Main main;
+	
 	/**
 	 * Initialize GUI Elements. This block handles the frame and the overall layout.
 	 */
-	public GUI(Searcher searcher) throws ClassNotFoundException, InstantiationException, IllegalAccessException,
+	public GUI() throws ClassNotFoundException, InstantiationException, IllegalAccessException,
 			UnsupportedLookAndFeelException {
 		super("Researcher");
 		this.searcher = searcher;
@@ -50,7 +55,7 @@ public class GUI extends JFrame {
 		// searchArea.setBackground(Color.white);
 		taskArea.setBackground(Color.gray);
 
-		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, searchArea, taskArea);
+		splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, searchArea, taskArea);
 		splitPane.setEnabled(false);
 		splitPane.setDividerSize(0);
 		splitPane.setDividerLocation(getBounds().width - 350);
@@ -136,15 +141,16 @@ public class GUI extends JFrame {
 		taskAreaContent.add(Box.createRigidArea(new Dimension(0, 50)));
 		
 		// Daily Tasks
-		JPanel dailyTasks = new JPanel();
+		dailyTasks = new JPanel();
 		dailyTasks.setLayout(new BoxLayout(dailyTasks, BoxLayout.Y_AXIS));
 		
 		// dailyTasks.setBackground(Color.red);
-		addTask("Reclaim the holy lands: COMPLETE", dailyTasks);
-		addTask("taskB", dailyTasks);
-		addTask("taskC", dailyTasks);
-		addTask("taskD", dailyTasks);
-		addTask("taskE", dailyTasks);
+//		addTask("Reclaim the holy lands: COMPLETE", dailyTasks);
+//		addTask("taskB", dailyTasks);
+//		addTask("taskC", dailyTasks);
+//		addTask("taskD", dailyTasks);
+//		addTask("taskE", dailyTasks);
+		loadTasks();
 
 		taskAreaContent.add(dailyTasks);
 		
@@ -163,30 +169,37 @@ public class GUI extends JFrame {
 		taskAreaContent.add(articleDropoff);
 	}
 	
+	public void loadTasks() {
+		TaskManager tm = main.t;
+		System.out.println(tm.tasks.get(0).text);
+		
+		for (Task task : tm.tasks) {
+			addTask(task);
+		}
+	}
+	
 	/**
 	 * Adds a task onto a list of tasks
 	 * @param taskText: the text meant to be inside the task
 	 * @param container: the container (with a GridBagLayout) holding the task
 	 */
-	public void addTask(String taskText, JPanel container) {
-		/*int rows = container.getComponentCount() / 2;
-
-		JLabel task = new JLabel(taskText);
-		GridBagConstraints taskGBC = new GridBagConstraints();
-		taskGBC.gridx = 0;
-		taskGBC.gridy = rows;
-		taskGBC.weightx = 1;
-		container.add(task, taskGBC);
-
-		JCheckBox checkBox = new JCheckBox();
-		GridBagConstraints checkBoxGBC = new GridBagConstraints();
-		checkBoxGBC.gridx = 1;
-		checkBoxGBC.gridy = rows;
-		checkBoxGBC.weightx = 0.5;
-		container.add(checkBox, checkBoxGBC);*/
-		
-		JTask task = new JTask(taskText);
-		container.add(task);
+	public void addTask(Task task) {
+		JTask t = new JTask(task, this, Main.s);
+		dailyTasks.add(t);
+	}
+	
+	public void removeTask(int id) {
+		Component[] comps = dailyTasks.getComponents();
+		for (Component comp : comps) {
+			JTask jTask = (JTask) comp;
+			if (jTask.task.id == id) {
+				dailyTasks.remove(comp);
+				
+				dailyTasks.revalidate();
+				dailyTasks.repaint();
+				break;
+			}
+		}
 	}
 	
 	//Loads all search results
