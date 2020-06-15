@@ -31,6 +31,7 @@ public class GUI extends JFrame {
 	
 	private JTextField searchBar;
 	private JPanel searchResults;
+	private JPanel articleDropoff;
 	
 	private Main main;
 	
@@ -109,6 +110,9 @@ public class GUI extends JFrame {
 		searchArea.add(topBar, BorderLayout.NORTH);
 
 		// Search results
+		JPanel searchResultsHolder = new JPanel(new BorderLayout());
+		searchArea.add(searchResultsHolder, BorderLayout.CENTER);
+		
 		searchResults = new JPanel();
 		searchResults.setLayout(new BoxLayout(searchResults, BoxLayout.Y_AXIS));
 		searchResults.setBackground(Color.white);
@@ -117,7 +121,8 @@ public class GUI extends JFrame {
 		addSearchResult(new NewsArticle("title", "sampleText", "url", "smallurl", "author", 5, 5), searchResults);
 		
 		JScrollPane searchResultsScroll = new JScrollPane(searchResults);
-		searchArea.add(searchResultsScroll, BorderLayout.CENTER);
+		searchResultsHolder.add(searchResultsScroll, BorderLayout.NORTH);
+		searchArea.add(searchResultsHolder, BorderLayout.CENTER);
 	}
 
 	/**
@@ -158,7 +163,7 @@ public class GUI extends JFrame {
 		taskAreaContent.add(Box.createRigidArea(new Dimension(0, 50)));
 		
 		// Article Dropoff
-		JPanel articleDropoff = new JPanel();
+		articleDropoff = new JPanel();
 		JLabel dropoffLabel = new JLabel("OMNOMNOMNOMNOM");
 		dropoffLabel.setFont(new Font(logoText.getFont().getName(), Font.BOLD, 25));
 		dropoffLabel.addMouseListener(new ArticleReleaseListener(this, searcher));

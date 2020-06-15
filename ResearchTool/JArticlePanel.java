@@ -1,6 +1,8 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -12,8 +14,16 @@ public class JArticlePanel extends JPanel{
 		super();
 		art = article;
 		
+		//init
 		setLayout(new BorderLayout());
-		addMouseListener(new ArticleSelectListener(gui, searcher));
+		
+		
+		//Save Button
+		JButton saveButton = new JButton("Save");
+		saveButton.setBorder(new EmptyBorder(0, 5, 0, 25));
+		add(saveButton, BorderLayout.WEST);
+		
+		//Main area
 		
 		JLabel name = new JLabel(art.getName());
 		JLabel sampleText = new JLabel(art.getSampleText());
@@ -28,8 +38,12 @@ public class JArticlePanel extends JPanel{
 		content.add(url);
 		content.add(smallURL);
 		content.add(author);
+		
+		//Listener
+		content.addMouseListener(new ArticleSelectListener(gui, searcher));
 		add(content, BorderLayout.CENTER);
 		
+		//Rating/Cred
 		JPanel rating = new JPanel();
 		rating.setLayout(new BoxLayout(rating, BoxLayout.Y_AXIS));
 		rating.setBorder(new EmptyBorder(0, 0, 0, 30));
