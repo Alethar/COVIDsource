@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 public class JArticlePanel extends JPanel{
 	Article art;
 	
-	JArticlePanel (Article article, Searcher searcher, GUI gui) {
+	JArticlePanel (Article article) {
 		super();
 		art = article;
 		
@@ -42,7 +42,7 @@ public class JArticlePanel extends JPanel{
 		content.add(author);
 		
 		//Listener
-		content.addMouseListener(new ArticleSelectListener(gui, searcher));
+		content.addMouseListener(new ArticleSelectListener(art));
 		add(content, BorderLayout.CENTER);
 		
 		//Rating/Cred

@@ -6,13 +6,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class ArticleSelectListener implements MouseListener {
-
-	private GUI gui;
-	private Searcher searcher;
 	
-	ArticleSelectListener (GUI g, Searcher s) {
-		gui = g;
-		searcher = s;
+	private Article art;
+	
+	ArticleSelectListener (Article art) {
+		this.art = art;
 	}
 	
 	public void mouseClicked(MouseEvent e) {
@@ -20,11 +18,7 @@ public class ArticleSelectListener implements MouseListener {
 		//Assign url to mouse
 
 		Mouse.hasURL = true;
-		
-		JPanel panel = (JPanel) ((JPanel) e.getSource()).getParent();
-		JPanel childPanel = (JPanel) ((BorderLayout) panel.getLayout()).getLayoutComponent(BorderLayout.CENTER);
-		JLabel urlLabel = (JLabel) childPanel.getComponent(2);
-		Mouse.url = urlLabel.getText();
+		Mouse.url = art.getURL();
 		
 		System.out.println(Mouse.url + " picked up");
 		

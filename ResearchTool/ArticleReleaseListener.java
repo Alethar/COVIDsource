@@ -6,9 +6,7 @@ public class ArticleReleaseListener implements MouseListener {
 	private GUI gui;
 	private Searcher searcher;
 	
-	ArticleReleaseListener (GUI g, Searcher s) {
-		gui = g;
-		searcher = s;
+	ArticleReleaseListener () {
 	}
 	
 	public void mouseClicked(MouseEvent e) {

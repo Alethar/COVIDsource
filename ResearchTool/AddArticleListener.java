@@ -19,29 +19,25 @@ public class AddArticleListener implements MouseListener
 
     public void mousePressed( MouseEvent e )
     {
-        Main.a.cloneArticle(article);
-        
+        Main.g.stashArticle(article);
     }
 
+	
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 
-    public void mouseReleased( MouseEvent e )
-    {
-        // TODO Auto-generated method stub
-        
-    }
+	
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 
-
-    public void mouseEntered( MouseEvent e )
-    {
-        // TODO Auto-generated method stub
-        
-    }
-
-
-    public void mouseExited( MouseEvent e )
-    {
-        // TODO Auto-generated method stub
-        
-    }
+	
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

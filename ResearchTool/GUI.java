@@ -3,13 +3,11 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -35,6 +33,7 @@ public class GUI extends JFrame {
 	private JPanel ArticleHolderArea;
 	
 	private Main main;
+	private ArrayList<JStashedArticle> stashedArticles;
 	
 	/**
 	 * Initialize GUI Elements. This block handles the frame and the overall layout.
@@ -50,7 +49,8 @@ public class GUI extends JFrame {
 		mainArea = new JPanel();
 		mainArea.setLayout(new BorderLayout());
 		add(mainArea);
-
+		
+		stashedArticles = new ArrayList();
 		taskArea = new JPanel();
 		searchArea = new JPanel();
 
@@ -78,7 +78,7 @@ public class GUI extends JFrame {
 		repaint();
 		
 	}
-	
+
 	
 	/**
 	 * Initializes the left part of the page
@@ -167,7 +167,7 @@ public class GUI extends JFrame {
 		articleDropoff = new JPanel();
 		JLabel dropoffLabel = new JLabel("OMNOMNOMNOMNOM");
 		dropoffLabel.setFont(new Font(logoText.getFont().getName(), Font.BOLD, 25));
-		dropoffLabel.addMouseListener(new ArticleReleaseListener(this, searcher));
+		dropoffLabel.addMouseListener(new ArticleReleaseListener());
 		
 		articleDropoff.setBackground(Color.green);
 		
@@ -176,6 +176,7 @@ public class GUI extends JFrame {
 		
 		ArticleHolderArea = new JPanel();
 		ArticleHolderArea.setLayout(new BoxLayout(ArticleHolderArea, BoxLayout.Y_AXIS));
+		taskAreaContent.add(ArticleHolderArea);
 	}
 	
 	public void loadTasks() {
@@ -239,7 +240,7 @@ public class GUI extends JFrame {
 		//This is so the credibility score can be layed out next to it.
 		//All of this can then go into the constructor for the new class.
 		
-		JArticlePanel parent = new JArticlePanel(article, searcher, this);
+		JArticlePanel parent = new JArticlePanel(article);
 		
 		container.add(parent);
 		
@@ -252,6 +253,12 @@ public class GUI extends JFrame {
 	}
 	
 	public void stashArticle(Article art) {
-		ArticleHolderArea.add(new JStashedArticle(art));
+		JStashedArticle stashedArt = new JStashedArticle(art);
+		ArticleHolderArea.add(stashedArt);
+		ArticleHolderArea.revalidate();
+		ArticleHolderArea.repaint();
+		System.out.println("hi");
+		
+		stashedArticles.add(stashedArt);
 	}
 }
