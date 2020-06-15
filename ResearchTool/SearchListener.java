@@ -14,7 +14,7 @@ public class SearchListener implements ActionListener {
 		searcher.clearSources();
 		
 		String searchTerm = gui.getSearchBarContent();
-		System.out.println("Searched for: "+searchTerm);
+		//System.out.println("Searched for: "+searchTerm);
 		
 		//Convert to ArrayList
 		String[] termsArr = searchTerm.split(" ");

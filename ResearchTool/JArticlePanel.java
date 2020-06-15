@@ -74,7 +74,7 @@ public class JArticlePanel extends JPanel{
 		rating.setBorder(new EmptyBorder(0, 0, 0, 30));
 		
 		String cl = art.getClass().getName();
-		System.out.println(cl);
+		//System.out.println(cl);
 		if (cl.equals("NewsArticle")) {
 			NewsArticle newsArt = (NewsArticle) art;
 			

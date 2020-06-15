@@ -12,7 +12,7 @@ public class ArticleReleaseListener implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		if (Mouse.hasURL) {
-			System.out.println(Mouse.url+" released");
+			//System.out.println(Mouse.url+" released");
 			Mouse.hasURL = false;
 			
 			//TODO: Deliver article to some backend (note that article has been lost by this point, 

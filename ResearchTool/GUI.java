@@ -269,7 +269,7 @@ public class GUI extends JFrame {
 	
 	public void loadTasks() {
 		TaskManager tm = main.t;
-		System.out.println(tm.tasks.get(0).text);
+		//System.out.println(tm.tasks.get(0).text);
 		
 		for (Task task : tm.tasks) {
 			addTask(task);
@@ -313,7 +313,7 @@ public class GUI extends JFrame {
 		//Load in new
 		for (int i=0; i<searcher.getArticleNum(); i++) {
 			Article art = searcher.getArticle(i);
-			System.out.println(art.getName());
+			//System.out.println(art.getName());
 			
 			addSearchResult(art, searchResults);
 		}
@@ -322,7 +322,7 @@ public class GUI extends JFrame {
 		revalidate();
 		repaint();
 		
-		System.out.println(searcher.getArticleNum());
+		//System.out.println(searcher.getArticleNum());
 	}
 
 	public void addSearchResult(Article article, JPanel container) {
@@ -360,7 +360,7 @@ public class GUI extends JFrame {
 		ArticleHolderArea.add(stashedArt);
 		ArticleHolderArea.revalidate();
 		ArticleHolderArea.repaint();
-		System.out.println("hi");
+		//System.out.println("hi");
 	}
 
 	public void removeStashedArticle(Article art) {
