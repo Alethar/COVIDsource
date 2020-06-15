@@ -268,7 +268,14 @@ public class Searcher
         // url = url.split( "." )[1];
         for ( int i = 0; i < newsURLs.length; i++ )
         {
-            if ( url.contains( newsURLs[i] ) )
+            String noWs;
+            try {
+                noWs = newsURLs[i].split( "." )[1] + newsURLs[i].split( "." )[2];
+            }
+            catch(Exception e){
+                noWs = newsURLs[i];
+            }
+            if ( url.contains( newsURLs[i] ) || newsURLs[i].contains( url ) || url.contains( noWs ))
             {
                 return i;
             }
@@ -290,6 +297,8 @@ public class Searcher
         String os = System.getProperty( "os.name" ).toLowerCase();
         Runtime rt = Runtime.getRuntime();
 
+        String urlTrimmed = url.substring( 1 );
+
         try
         {
             if ( os.indexOf( "win" ) >= 0 )
@@ -297,11 +306,11 @@ public class Searcher
 
                 // Doesn't support urls like page.html#nameLink, maybe just
                 // delete those?
-                rt.exec( "rundll32 url.dll,FileProtocolHandler " + url );
+                rt.exec( "rundll32 url.dll,FileProtocolHandler " + urlTrimmed );
             }
             else if ( os.indexOf( "mac" ) >= 0 )
             {
-                rt.exec( "open " + url );
+                rt.exec( "open " + urlTrimmed );
             }
             else if ( os.indexOf( "nix" ) >= 0 || os.indexOf( "nux" ) >= 0 )
             {
@@ -313,7 +322,7 @@ public class Searcher
                 StringBuffer cmd = new StringBuffer();
                 for ( int i = 0; i < browsers.length; i++ )
                     cmd.append(
-                        ( i == 0 ? "" : " || " ) + browsers[i] + " \"" + url + "\" " );
+                        ( i == 0 ? "" : " || " ) + browsers[i] + " \"" + urlTrimmed + "\" " );
 
                 rt.exec( new String[] { "sh", "-c", cmd.toString() } );
             }
