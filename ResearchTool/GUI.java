@@ -52,7 +52,7 @@ public class GUI extends JFrame {
 		super("Researcher");
 		searcher = Main.s;
 		setVisible(true);
-		setSize(1600, 900);
+		setSize(1280, 720);
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -77,6 +77,7 @@ public class GUI extends JFrame {
 		splitPane.setDividerSize(0);
 		splitPane.setDividerLocation(getBounds().width - 350);
 		// TODO: This needs to resize when the window size changes
+		addComponentListener(new ResizeListener(splitPane, this));
 
 		mainArea.add(splitPane, BorderLayout.CENTER);
 
@@ -204,7 +205,7 @@ public class GUI extends JFrame {
 		taskAreaContent.setBackground(MID_BLUE);
 		
 		//Spacing
-		taskAreaContent.add(Box.createRigidArea(new Dimension(0, 70)));
+		taskAreaContent.add(Box.createRigidArea(new Dimension(0, 12)));
 		
 		// Daily Tasks
 		dailyTasks = new JPanel();
