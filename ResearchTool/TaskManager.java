@@ -13,9 +13,9 @@ public class TaskManager {
 		currentId = -1;
 		
 		tasks = new ArrayList<>();
-		tasks.add(new Task("Reclaim the holy land", pullId()));
-		tasks.add(new Task("Reclaim the holy land", pullId()));
-		tasks.add(new Task("Reclaim the holy land", pullId()));
+		tasks.add(new Task("-   Read sources from sides of an issue", pullId()));
+		tasks.add(new Task("-   Take note of how old an article is", pullId()));
+		tasks.add(new Task("-   Use bias and credibility ratings to choose articles", pullId()));
 	}
 	
 	public int pullId() {

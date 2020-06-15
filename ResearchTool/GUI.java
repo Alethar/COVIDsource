@@ -3,10 +3,15 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.util.ArrayList;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -32,6 +37,11 @@ public class GUI extends JFrame {
 	private JPanel articleDropoff;
 	private JPanel ArticleHolderArea;
 	
+	private Color DEEP_BLUE;
+	private Color MID_BLUE;
+	private Color LIGHT_BLUE;
+	private Color LIGHT_GRAY;
+	
 	private Main main;
 	
 	/**
@@ -44,6 +54,13 @@ public class GUI extends JFrame {
 		setVisible(true);
 		setSize(1600, 900);
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+		
+		DEEP_BLUE = new Color(52, 102, 168);
+		MID_BLUE = new Color(70, 130, 210);
+		LIGHT_BLUE = new Color(172, 202, 244);
+		LIGHT_GRAY = new Color(240, 240, 240);
 
 		mainArea = new JPanel();
 		mainArea.setLayout(new BorderLayout());
@@ -90,18 +107,43 @@ public class GUI extends JFrame {
 		topBar.setLayout(new BoxLayout(topBar, BoxLayout.Y_AXIS));
 		topBar.setBorder(new EmptyBorder(0, 30, 0, 0));
 		topBar.add(Box.createRigidArea(new Dimension(0, 15)));
+		topBar.setBackground(MID_BLUE);
 		
 
 		// Adding items to top
 		SearchListener searchAction = new SearchListener();
 		
-		searchBar = new JTextField(20);
+		searchBar = new JTextField(2);
 		searchBar.addActionListener(searchAction);
-		topBar.add(searchBar);
+		searchBar.setPreferredSize(new Dimension(0, 50));
+		searchBar.setBorder(new EmptyBorder(0, 0, 0, 0));
+		searchBar.setFont(new Font(searchBar.getFont().getName(), Font.PLAIN, 15));
 		
-		JButton searchButton = new JButton("Search");
+		
+		BufferedImage img = null;
+		try {
+		    img = ImageIO.read(new File("assets/search.png"));
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		Image dimg = img.getScaledInstance(138, 48, Image.SCALE_SMOOTH);
+		ImageIcon imageIcon = new ImageIcon(dimg);
+		
+		JButton searchButton = new JButton(imageIcon);
+		searchButton.setBorderPainted(false); 
+		searchButton.setContentAreaFilled(false); 
+		searchButton.setFocusPainted(false); 
+		searchButton.setOpaque(false);
+		searchButton.setBorder(new EmptyBorder(0, 0, 0, 0));
 		searchButton.addActionListener(searchAction);
-		topBar.add(searchButton);
+		searchButton.setBackground(MID_BLUE);
+		
+		JPanel topBarContent = new JPanel(new BorderLayout());
+		topBarContent.setOpaque(false);
+		topBarContent.setBorder(new EmptyBorder(0, 0, 14, 0));
+		topBarContent.add(searchButton, BorderLayout.EAST);
+		topBarContent.add(searchBar, BorderLayout.CENTER);
+		topBar.add(topBarContent);
 
 		// Assigning top bar to whole area container
 		// (NOTE: This has to happen after topBar is fully constructed, otherwise it
@@ -115,7 +157,7 @@ public class GUI extends JFrame {
 		searchResults = new JPanel();
 		searchResults.setLayout(new BoxLayout(searchResults, BoxLayout.Y_AXIS));
 		searchResults.setBackground(Color.white);
-		searchResults.setBorder(new EmptyBorder(20, 50, 0, 0));
+		searchResults.setBorder(new EmptyBorder(20, 30, 0, 0));
 		
 		//addSearchResult(new NewsArticle("title", "sampleText", "url", "smallurl", "author", 5, 5), searchResults);
 		
@@ -143,17 +185,31 @@ public class GUI extends JFrame {
 
 		// Logo
 		JPanel logo = new JPanel();
-		JLabel logoText = new JLabel("COVIDsource");
-		logoText.setFont(new Font(logoText.getFont().getName(), Font.BOLD, 25));
-		logo.add(logoText);
-		taskAreaContent.add(logoText);
+		//JLabel logoText = new JLabel("CovidSource");
+		
+		BufferedImage img = null;
+		try {
+		    img = ImageIO.read(new File("assets/logo2.png"));
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		Image dimg = img.getScaledInstance(165, 58, Image.SCALE_SMOOTH);
+		ImageIcon imageIcon = new ImageIcon(dimg);
+		JLabel logoImg = new JLabel(imageIcon);
+		logoImg.setBorder(new EmptyBorder(10, 0, 0, 15));
+		//logoText.setFont(new Font(logoText.getFont().getName(), Font.BOLD, 25));
+		logo.add(logoImg);
+		taskAreaContent.add(logoImg);
+		
+		taskAreaContent.setBackground(MID_BLUE);
 		
 		//Spacing
-		taskAreaContent.add(Box.createRigidArea(new Dimension(0, 50)));
+		taskAreaContent.add(Box.createRigidArea(new Dimension(0, 70)));
 		
 		// Daily Tasks
 		dailyTasks = new JPanel();
 		dailyTasks.setLayout(new BoxLayout(dailyTasks, BoxLayout.Y_AXIS));
+		dailyTasks.setBorder(new EmptyBorder(20, 0, 20, 0));
 		
 		// dailyTasks.setBackground(Color.red);
 //		addTask("Reclaim the holy lands: COMPLETE", dailyTasks);
@@ -170,16 +226,29 @@ public class GUI extends JFrame {
 		JTextField addTaskField = new JTextField();
 		addTaskPanel.add(addTaskField, BorderLayout.CENTER);
 		
-		JButton addTaskButton = new JButton("Add");
+		//Task button
+		BufferedImage img1 = null;
+		try {
+		    img1 = ImageIO.read(new File("assets/addtask.png"));
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		Image dimg1 = img1.getScaledInstance(105, 36, Image.SCALE_SMOOTH);
+		ImageIcon imageIcon1 = new ImageIcon(dimg1);
+		
+		JButton addTaskButton = new JButton(imageIcon1);
+		addTaskButton.setBorderPainted(false); 
+		addTaskButton.setContentAreaFilled(false); 
+		addTaskButton.setFocusPainted(false); 
+		addTaskButton.setOpaque(false);
+		addTaskButton.setBorder(new EmptyBorder(0, 0, 0, 0));
 		addTaskPanel.add(addTaskButton, BorderLayout.EAST);
 		
 		addTaskButton.addActionListener(new AddTaskListener(addTaskField));
 		addTaskField.addActionListener(new AddTaskListener(addTaskField));
+		addTaskPanel.setBorder(new EmptyBorder(0, 0, 20, 0));
 		
 		taskAreaContent.add(addTaskPanel);
-		
-		//Spacing
-		taskAreaContent.add(Box.createRigidArea(new Dimension(0, 50)));
 		
 		// Article Dropoff
 //		articleDropoff = new JPanel();

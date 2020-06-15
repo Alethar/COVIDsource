@@ -12,7 +12,7 @@ public class AddTaskListener implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		String t = text.getText();
+		String t = "-   "+text.getText();
 		
 		Main.g.addTask(new Task(t, Main.t.pullId()));
 	}
