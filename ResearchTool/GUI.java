@@ -32,7 +32,7 @@ public class GUI extends JFrame {
 	private JTextField searchBar;
 	private JPanel searchResults;
 	private JPanel articleDropoff;
-	//private JPanel
+	private JPanel ArticleHolderArea;
 	
 	private Main main;
 	
@@ -174,9 +174,8 @@ public class GUI extends JFrame {
 		articleDropoff.add(dropoffLabel);
 		taskAreaContent.add(articleDropoff);
 		
-		JPanel ArticleHolderArea = new JPanel();
+		ArticleHolderArea = new JPanel();
 		ArticleHolderArea.setLayout(new BoxLayout(ArticleHolderArea, BoxLayout.Y_AXIS));
-		
 	}
 	
 	public void loadTasks() {
@@ -250,5 +249,9 @@ public class GUI extends JFrame {
 	
 	public String getSearchBarContent() {
 		return searchBar.getText();
+	}
+	
+	public void stashArticle(Article art) {
+		ArticleHolderArea.add(new JStashedArticle(art));
 	}
 }
