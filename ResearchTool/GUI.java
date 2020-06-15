@@ -117,10 +117,10 @@ public class GUI extends JFrame {
 		searchResults.setBackground(Color.white);
 		searchResults.setBorder(new EmptyBorder(20, 50, 0, 0));
 		
-		addSearchResult(new NewsArticle("title", "sampleText", "url", "smallurl", "author", 5, 5), searchResults);
+		//addSearchResult(new NewsArticle("title", "sampleText", "url", "smallurl", "author", 5, 5), searchResults);
 		
 		JScrollPane searchResultsScroll = new JScrollPane(searchResults);
-		searchResultsHolder.add(searchResultsScroll, BorderLayout.NORTH);
+		searchResultsHolder.add(searchResultsScroll, BorderLayout.CENTER);
 		searchArea.add(searchResultsHolder, BorderLayout.CENTER);
 	}
 
@@ -130,9 +130,16 @@ public class GUI extends JFrame {
 	private void initTaskbar() {
 		// Sidebar
 		taskArea.setLayout(new BorderLayout());
+		JPanel taskAreaHolder = new JPanel();
+		taskAreaHolder.setLayout(new BorderLayout());
+		taskAreaHolder.setBackground(Color.WHITE);
+		
 		JPanel taskAreaContent = new JPanel();
 		taskAreaContent.setLayout(new BoxLayout(taskAreaContent, BoxLayout.Y_AXIS));
-		taskArea.add(taskAreaContent, BorderLayout.NORTH);
+		taskAreaHolder.add(taskAreaContent, BorderLayout.NORTH);
+		
+		JScrollPane taskAreaScroll = new JScrollPane(taskAreaHolder);
+		taskArea.add(taskAreaHolder, BorderLayout.CENTER);
 
 		// Logo
 		JPanel logo = new JPanel();
@@ -162,15 +169,15 @@ public class GUI extends JFrame {
 		taskAreaContent.add(Box.createRigidArea(new Dimension(0, 50)));
 		
 		// Article Dropoff
-		articleDropoff = new JPanel();
-		JLabel dropoffLabel = new JLabel("OMNOMNOMNOMNOM");
-		dropoffLabel.setFont(new Font(logoText.getFont().getName(), Font.BOLD, 25));
-		dropoffLabel.addMouseListener(new ArticleReleaseListener());
-		
-		articleDropoff.setBackground(Color.green);
-		
-		articleDropoff.add(dropoffLabel);
-		taskAreaContent.add(articleDropoff);
+//		articleDropoff = new JPanel();
+//		JLabel dropoffLabel = new JLabel("OMNOMNOMNOMNOM");
+//		dropoffLabel.setFont(new Font(logoText.getFont().getName(), Font.BOLD, 25));
+//		dropoffLabel.addMouseListener(new ArticleReleaseListener());
+//		
+//		articleDropoff.setBackground(Color.green);
+//		
+//		articleDropoff.add(dropoffLabel);
+//		taskAreaContent.add(articleDropoff);
 		
 		ArticleHolderArea = new JPanel();
 		ArticleHolderArea.setLayout(new BoxLayout(ArticleHolderArea, BoxLayout.Y_AXIS));
